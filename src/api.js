@@ -3,7 +3,7 @@ import mockOxfordResponse from './mockOxfordAPI_ace';
 export default {
   fetchDefinition: function (word) {
     var self = this;
-    return this._fetchDefinitionFromOxfordApi(word)
+    return this._mockFetchDefinition(word)
       .then(self._parseResponseFromOxfordApi.bind(self));
   },
 
@@ -12,7 +12,7 @@ export default {
     return new Promise(function (resolve) {
       setTimeout(function () {
         resolve(mockOxfordResponse);
-      }, 500);
+      }, 1500);
     });
   },
 
@@ -68,7 +68,8 @@ export default {
     return oldSenses.map(function (sense) {
       return {
         id: sense.id,
-        definition: sense.definitions[0]
+        definition: sense.definitions[0],
+        examples: sense.definitions[0].examples
       }
     })
   }

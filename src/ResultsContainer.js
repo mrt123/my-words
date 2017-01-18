@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import 'whatwg-fetch';
 import api from './api';
 import LexicalEntries from './LexicalEntries';
+import LoadingSpinner from './LoadingSpinner';
 
 import styled from 'styled-components';
 
@@ -24,7 +25,12 @@ class ResultsContainer extends Component {
 
   searchWord(word) {
     var self = this;
+
+    self.setState({loading: true});
+
     api.fetchDefinition(word).then(function (resp) {
+
+      self.setState({loading: false});
 
       if (resp.status === 'NOT_FOUND') {
         self.setState({lexicalEntries: [], error: 'Word not found!'});
@@ -36,10 +42,13 @@ class ResultsContainer extends Component {
   }
 
   render() {
+    var activeComponent = this.state.loading ? <LoadingSpinner></LoadingSpinner> :
+      <LexicalEntries lexicalEntries={this.state.lexicalEntries}></LexicalEntries>;
+
     return (
       <Result>
         {this.state.error}
-        <LexicalEntries lexicalEntries={this.state.lexicalEntries}></LexicalEntries>
+        {activeComponent}
       </Result>
     );
   }
