@@ -10,14 +10,14 @@ color: red;
   font-style: italic;
 `;
 
-export default (props) => {
-  var senses = props.entry.senses.map((sense)=> (
+export default ({ entry }) => {
+  var senses = entry.senses.map((sense)=> (
     <Sense key={sense.id} definition={sense.definition}></Sense>
   ));
 
   return (
     <LexicalEntryWrapper>
-      <LexicalCategory>{props.entry.lexicalCategory.toLowerCase()}:</LexicalCategory>
+      <LexicalCategory>{entry.lexicalCategory.toLowerCase()}:</LexicalCategory>
       <ol>{senses}</ol>
     </LexicalEntryWrapper>
   );
@@ -27,8 +27,8 @@ const SenseWrapper = styled.div`
   margin: 10px;
 `;
 
-const Sense = (props) => (
+const Sense = ({ definition }) => (
   <SenseWrapper>
-    <li>{props.definition}</li>
+    <li>{definition}</li>
   </SenseWrapper>
 );
