@@ -32,23 +32,37 @@ class Search extends Component {
   constructor(props) {
     super(props);
     this.state = {value: ''};
+
+    this.handleKeyPress = this.handleKeyPress.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSearch = this.handleSearch.bind(this);
   }
 
   handleChange(event) {
     this.setState({value: event.target.value});
   }
 
-  handleSearch(event) {
-    this.props.searchAction(this.state.value);
-    event.preventDefault();
+  handleSearch(e) {
+    if (this.state.value !== '') {
+      this.props.searchAction(this.state.value);
+    }
+    e.preventDefault();
+  }
+
+  handleKeyPress(e) {
+    if (e.key === 'Enter') {
+      this.handleSearch(e);
+    }
   }
 
   render() {
     return (
       <Wrapper>
-        <Input type="text" value={this.state.value} onChange={this.handleChange.bind(this)}
+        <Input type="text" value={this.state.value}
+               onChange={this.handleChange}
+               onKeyPress={this.handleKeyPress}
                placeholder={PLACEHOLDER_TEXT}/>
-        <Button onClick={this.handleSearch.bind(this)}>Search</Button>
+        <Button onClick={this.handleSearch}>Search</Button>
       </Wrapper>
     );
   }
