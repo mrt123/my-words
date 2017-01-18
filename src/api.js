@@ -30,7 +30,7 @@ export default {
 
         if (respPromise.status === 404) {
           return {
-            results: []
+            status: 'NOT_FOUND'
           }
 
         }
@@ -46,11 +46,8 @@ export default {
   _parseResponseFromOxfordApi: function (resp) {
     var self = this;
 
-    if (resp.results.length === 0) {
-      return {
-        metadata: '',
-        lexicalEntries: []
-      };
+    if (resp.status === 'NOT_FOUND') {
+      return resp;
     }
     else {
       var newLexicalEntries = resp.results[0].lexicalEntries.map(function (oldLexEntry) {

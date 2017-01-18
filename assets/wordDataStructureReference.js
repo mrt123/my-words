@@ -14,3 +14,7 @@ var dataSample = {
     }
   ]
 };
+
+var errorSample = {
+  status: 'NOT_FOUND'
+};

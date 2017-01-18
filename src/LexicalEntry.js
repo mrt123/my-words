@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const LexicalEntryWrapper = styled.div`
-  margin: 10px;
+  margin: 10px 0;
 `;
 
 const LexicalCategory = styled.span`
