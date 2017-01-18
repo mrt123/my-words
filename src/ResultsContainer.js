@@ -7,11 +7,11 @@ class ResultsContainer extends Component {
 
   constructor() {
     super();
-    this.state = { lexicalEntries: [] }
+    this.state = {lexicalEntries: []}
   }
 
   componentWillReceiveProps(nextProps) {
-    if(this.props.searchValue !== nextProps.searchValue) {
+    if (this.props.searchValue !== nextProps.searchValue) {
       this.searchWord(nextProps.searchValue);
     }
   }
@@ -19,12 +19,14 @@ class ResultsContainer extends Component {
   searchWord(word) {
     var self = this;
     api.fetchDefinition(word).then(function (resp) {
-      self.setState({ lexicalEntries: resp.lexicalEntries});
+      self.setState({lexicalEntries: resp.lexicalEntries});
     });
   }
 
   render() {
-    return <LexicalEntries lexicalEntries={this.state.lexicalEntries}></LexicalEntries>;
+    return (
+      <LexicalEntries lexicalEntries={this.state.lexicalEntries}></LexicalEntries>
+    );
   }
 }
 
