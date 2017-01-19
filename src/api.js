@@ -3,7 +3,7 @@ import mockOxfordResponse from './mockOxfordAPI_ace';
 export default {
   fetchDefinition: function (word) {
     var self = this;
-    return this._mockFetchDefinition(word)
+    return this._fetchDefinitionFromOxfordApi(word)
       .then(self._parseResponseFromOxfordApi.bind(self));
   },
 
@@ -76,8 +76,14 @@ export default {
   },
 
   _parseExamplesFromOxford: function (oxfordExamples) {
-    return oxfordExamples.map(function (example) {
-      return example.text;
-    })
+
+    if(oxfordExamples === undefined) {
+      return [];
+    }
+    else {
+      return oxfordExamples.map(function (example) {
+        return example.text;
+      })
+    }
   }
 }
