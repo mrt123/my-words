@@ -45,7 +45,7 @@ class App extends Component {
     return (
       <AppContainer>
         <AppHeader>
-          <AppLogo src={logo} className="App-logo" alt="logo"/>
+          <AppLogo src={logo} alt="logo"/>
           <span>My Words</span>
         </AppHeader>
         <Search searchAction={this.search}></Search>
