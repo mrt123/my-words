@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router'
 import styled, { keyframes } from 'styled-components';
 import logo from './logo.svg';
 import './App.css';
-import Search from './../Search';
-import ResultsContainer from './../ResultsContainer';
 
 const AppContainer = styled.div`
   display: flex;
@@ -31,25 +30,22 @@ const AppLogo = styled.img`
 
 class App extends Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {searchValue: ''};
-    this.search = this.search.bind(this);
-  }
-
-  search(v) {
-    this.setState({searchValue: v});
-  }
-
   render() {
     return (
       <AppContainer>
+
+        <ul>
+          <li><Link to="/">Home</Link></li>
+          <li><Link to="/about">About</Link></li>
+          <li><Link to="/myWords">My Words</Link></li>
+        </ul>
+
         <AppHeader>
           <AppLogo src={logo} alt="logo"/>
           <span>My Words</span>
         </AppHeader>
-        <Search searchAction={this.search}></Search>
-        <ResultsContainer searchValue={this.state.searchValue}></ResultsContainer>
+
+        {this.props.children}
       </AppContainer>
     );
   }
