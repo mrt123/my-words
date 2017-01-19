@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import 'whatwg-fetch';
-import api from './api';
+import api from './../../api';
 import LexicalEntries from './LexicalEntries';
-import LoadingSpinner from './LoadingSpinner';
+import LoadingSpinner from './../../LoadingSpinner';
 
 import styled from 'styled-components';
 

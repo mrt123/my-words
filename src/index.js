@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Router, Route, IndexRoute, hashHistory } from 'react-router'
-import Home from './rotues/Home';
+import Home from './rotues/home/Home';
 import About from './rotues/About';
 import MyWords from './rotues/MyWords';
 

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import Search from './../Search';
-import ResultsContainer from './../ResultsContainer';
+import Search from './Search';
+import ResultsContainer from './ResultsContainer';
 
 export default class Home extends Component {
 
