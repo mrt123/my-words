@@ -1,5 +1,6 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
+import reactLogo from './App/logo.svg';
 
 const rotate360 = keyframes`
   from { transform: rotate(0deg); }
@@ -9,10 +10,16 @@ const rotate360 = keyframes`
 const SpinnerWrapper = styled.div`
   display: flex;
   justify-content: center;
-  animation: ${rotate360} 2s linear infinite;
   margin: 10px;
 `;
 
+const Spinner = styled.img`
+  width: 80px;
+  animation: ${rotate360} 2s linear infinite;
+`;
+
 export default () => (
-  <SpinnerWrapper>SPINNER</SpinnerWrapper>
+  <SpinnerWrapper src={reactLogo}>
+    <Spinner src={reactLogo}></Spinner>
+  </SpinnerWrapper>
 );
