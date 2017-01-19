@@ -1,9 +1,9 @@
 import React from 'react';
 
 import { Router, Route, IndexRoute, hashHistory } from 'react-router'
-import Home from './Home';
-import About from './About';
-import MyWords from './MyWords';
+import Home from './rotues/Home';
+import About from './rotues/About';
+import MyWords from './rotues/MyWords';
 
 import ReactDOM from 'react-dom';
 import App from './App/App';
