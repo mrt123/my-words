@@ -11,9 +11,9 @@ color: red;
 `;
 
 export default ({ entry }) => {
-  var senses = entry.senses.map((sense)=> (
-    <Sense key={sense.id} definition={sense.definition}></Sense>
-  ));
+  var senses = entry.senses.map((sense)=> {
+    return <Sense key={sense.id} definition={sense.definition} examples={sense.examples}></Sense>
+  });
 
   return (
     <LexicalEntryWrapper>
@@ -27,8 +27,28 @@ const SenseWrapper = styled.div`
   margin: 10px;
 `;
 
-const Sense = ({ definition }) => (
-  <SenseWrapper>
-    <li>{definition}</li>
-  </SenseWrapper>
-);
+
+const ExamplesWrapper = styled.div`
+  margin-top: 5px;
+`;
+
+const ExampleWrapper = styled.div`
+  color: #878787;
+  font-size: 15px;
+`;
+
+const Sense = ({ definition, examples }) => {
+
+  var exampleElements = examples.map((example, i)=> (
+    <ExampleWrapper key={i}>"{example}"</ExampleWrapper>
+  ));
+
+  return (
+    <SenseWrapper>
+      <li>
+        {definition}
+        <ExamplesWrapper>{exampleElements}</ExamplesWrapper>
+      </li>
+    </SenseWrapper>
+  );
+};

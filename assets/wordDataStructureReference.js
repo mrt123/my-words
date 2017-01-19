@@ -8,7 +8,11 @@ var dataSample = {
       senses: [
         {
           id: '',
-          definition: ''
+          definition: '',
+          examples: [
+            '',
+            ''
+          ]
         }
       ]
     }

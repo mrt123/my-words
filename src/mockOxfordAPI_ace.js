@@ -4,103 +4,100 @@ var resp = {
   },
   "results": [
     {
-      "id": "ace",
+      "id": "please",
       "language": "en",
       "lexicalEntries": [
         {
           "entries": [
             {
-              "homographNumber": "001",
-              "senses": [
+              "etymologies": [
+                "Middle English: from Old French plaisir to please, from Latin placere"
+              ],
+              "grammaticalFeatures": [
                 {
-                  "definitions": [
-                    "very good:"
-                  ],
-                  "id": "m_en_gb0004640.006"
+                  "text": "Transitive",
+                  "type": "Subcategorization"
+                },
+                {
+                  "text": "Present",
+                  "type": "Tense"
                 }
-              ]
-            }
-          ],
-          "language": "en",
-          "lexicalCategory": "Adjective",
-          "text": "ace"
-        },
-        {
-          "entries": [
-            {
+              ],
               "homographNumber": "000",
               "senses": [
                 {
                   "definitions": [
-                    "a playing card with a single spot on it, ranked as the highest card in its suit in most card games:"
+                    "cause to feel happy and satisfied:"
                   ],
-                  "id": "m_en_gb0004640.001"
-                },
-                {
-                  "definitions": [
-                    "a person who excels at a particular sport or other activity:"
+                  "examples": [
+                    {
+                      "text": "it pleased him to be seen with someone in the news"
+                    },
+                    {
+                      "text": "he arranged a fishing trip to please his son"
+                    }
                   ],
-                  "id": "m_en_gb0004640.002",
+                  "id": "m_en_gb0639850.001",
                   "subsenses": [
                     {
                       "definitions": [
-                        "a pilot who has shot down many enemy aircraft:"
+                        "give satisfaction:"
                       ],
-                      "id": "m_en_gb0004640.003"
+                      "examples": [
+                        {
+                          "text": "she was quiet and eager to please"
+                        }
+                      ],
+                      "id": "m_en_gb0639850.002"
+                    },
+                    {
+                      "definitions": [
+                        "satisfy aesthetically:"
+                      ],
+                      "examples": [
+                        {
+                          "text": "he was wearing a buttonhole that did not quite please the eye"
+                        }
+                      ],
+                      "id": "m_en_gb0639850.003"
                     }
                   ]
                 },
                 {
                   "definitions": [
-                    "(in tennis and similar games) a service that an opponent is unable to return and thus wins a point:"
+                    "take only one's own wishes into consideration in deciding how to act or proceed:"
                   ],
-                  "id": "m_en_gb0004640.004",
-                  "subsenses": [
+                  "examples": [
                     {
-                      "definitions": [
-                        "a hole in one:"
-                      ],
-                      "id": "m_en_gb0004640.005"
+                      "text": "this is the first time in ages that I can just please myself"
                     }
-                  ]
-                }
-              ]
-            }
-          ],
-          "language": "en",
-          "lexicalCategory": "Noun",
-          "text": "ace"
-        },
-        {
-          "entries": [
-            {
-              "homographNumber": "002",
-              "senses": [
-                {
-                  "definitions": [
-                    "(in tennis and similar games) serve an ace against (an opponent):"
                   ],
-                  "id": "m_en_gb0004640.007",
+                  "id": "m_en_gb0639850.004",
                   "subsenses": [
                     {
                       "definitions": [
-                        "score an ace on (a hole) or with (a shot):"
+                        "wish or desire to do something:"
                       ],
-                      "id": "m_en_gb0004640.008"
-                    }
-                  ]
-                },
-                {
-                  "definitions": [
-                    "achieve high marks in (a test or exam):"
-                  ],
-                  "id": "m_en_gb0004640.009",
-                  "subsenses": [
+                      "examples": [
+                        {
+                          "text": "feel free to wander around as you please"
+                        }
+                      ],
+                      "id": "m_en_gb0639850.005"
+                    },
                     {
                       "definitions": [
-                        "outdo someone in a competitive situation:"
+                        "it is someone's choice to do something:"
                       ],
-                      "id": "m_en_gb0004640.010"
+                      "examples": [
+                        {
+                          "text": "instead of attending the meeting, it pleased him to go off hunting"
+                        }
+                      ],
+                      "id": "m_en_gb0639850.006",
+                      "registers": [
+                        "dated"
+                      ]
                     }
                   ]
                 }
@@ -109,11 +106,120 @@ var resp = {
           ],
           "language": "en",
           "lexicalCategory": "Verb",
-          "text": "ace"
+          "pronunciations": [
+            {
+              "audioFile": "http://audio.oxforddictionaries.com/en/mp3/please_gb_1.mp3",
+              "dialects": [
+                "British English"
+              ],
+              "phoneticNotation": "IPA",
+              "phoneticSpelling": "pliːz"
+            }
+          ],
+          "text": "please"
+        },
+        {
+          "entries": [
+            {
+              "grammaticalFeatures": [
+                {
+                  "text": "Positive",
+                  "type": "Degree"
+                }
+              ],
+              "homographNumber": "001",
+              "senses": [
+                {
+                  "definitions": [
+                    "used in polite requests or questions:"
+                  ],
+                  "examples": [
+                    {
+                      "text": "what type of fish is this, please?"
+                    },
+                    {
+                      "text": "please address letters to the Editor"
+                    }
+                  ],
+                  "id": "m_en_gb0639850.007",
+                  "subsenses": [
+                    {
+                      "definitions": [
+                        "used to add urgency and emotion to a request:"
+                      ],
+                      "examples": [
+                        {
+                          "text": "please, please come home!"
+                        }
+                      ],
+                      "id": "m_en_gb0639850.008"
+                    },
+                    {
+                      "definitions": [
+                        "used to agree politely to a request:"
+                      ],
+                      "examples": [
+                        {
+                          "text": "‘May I ring you at home?’ ‘Please do.’"
+                        }
+                      ],
+                      "id": "m_en_gb0639850.009"
+                    },
+                    {
+                      "definitions": [
+                        "used in polite or emphatic acceptance of an offer:"
+                      ],
+                      "examples": [
+                        {
+                          "text": "‘Would you like a drink?’ ‘Yes, please.’"
+                        }
+                      ],
+                      "id": "m_en_gb0639850.010"
+                    },
+                    {
+                      "definitions": [
+                        "used to ask someone to stop doing something of which the speaker disapproves:"
+                      ],
+                      "examples": [
+                        {
+                          "text": "Rita, please—people are looking"
+                        }
+                      ],
+                      "id": "m_en_gb0639850.011"
+                    },
+                    {
+                      "definitions": [
+                        "used to express incredulity or irritation:"
+                      ],
+                      "examples": [
+                        {
+                          "text": "Oh please, is that meant to be a serious argument?"
+                        }
+                      ],
+                      "id": "m_en_gb0639850.016"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "language": "en",
+          "lexicalCategory": "Adverb",
+          "pronunciations": [
+            {
+              "audioFile": "http://audio.oxforddictionaries.com/en/mp3/please_gb_1.mp3",
+              "dialects": [
+                "British English"
+              ],
+              "phoneticNotation": "IPA",
+              "phoneticSpelling": "pliːz"
+            }
+          ],
+          "text": "please"
         }
       ],
       "type": "headword",
-      "word": "ace"
+      "word": "please"
     }
   ]
 };

@@ -12,7 +12,7 @@ export default {
     return new Promise(function (resolve) {
       setTimeout(function () {
         resolve(mockOxfordResponse);
-      }, 1500);
+      }, 500);
     });
   },
 
@@ -53,7 +53,7 @@ export default {
       var newLexicalEntries = resp.results[0].lexicalEntries.map(function (oldLexEntry) {
         return {
           lexicalCategory: oldLexEntry.lexicalCategory,
-          senses: self._parseSense(oldLexEntry.entries[0].senses)
+          senses: self._parseSenseFromOxford(oldLexEntry.entries[0].senses)
         }
       });
 
@@ -64,13 +64,20 @@ export default {
     }
   },
 
-  _parseSense: function (oldSenses) {
+  _parseSenseFromOxford: function (oldSenses) {
+    var self = this;
     return oldSenses.map(function (sense) {
       return {
         id: sense.id,
         definition: sense.definitions[0],
-        examples: sense.definitions[0].examples
+        examples: self._parseExamplesFromOxford(sense.examples)
       }
+    })
+  },
+
+  _parseExamplesFromOxford: function (oxfordExamples) {
+    return oxfordExamples.map(function (example) {
+      return example.text;
     })
   }
 }
