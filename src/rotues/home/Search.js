@@ -4,6 +4,7 @@ import styled from 'styled-components';
 const Wrapper = styled.div`
   display: flex;
   justify-content: center;
+  margin-top: 90px;
 `;
 
 const Input = styled.input`

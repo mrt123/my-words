@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router'
-import styled, { keyframes } from 'styled-components';
-import logo from './logo.svg';
-import './App.css';
+import { Match, Miss } from 'react-router'
+import styled from 'styled-components';
+import NavBar from './../NavBar';
+
+import Home from './../rotues/home/Home';
+import About from './../rotues/About';
+import MyWords from './../rotues/MyWords';
 
 const AppContainer = styled.div`
   display: flex;
@@ -10,42 +13,28 @@ const AppContainer = styled.div`
   justify-content: center;
 `;
 
-const AppHeader = styled.div`
-  height: 80px;
-  padding: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+const Scroller = styled.div`
+  overflow-y: auto;
 `;
 
-const rotate360 = keyframes`
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-`;
-
-const AppLogo = styled.img`
-  animation: ${rotate360} 20s linear infinite;
-  height: 80px;
-`;
+const NoMatch = ({ location }) => (
+  <div>
+    <h2>Whoops</h2>
+    <p>Sorry but {location.pathname} didn’t match any pages</p>
+  </div>
+);
 
 class App extends Component {
-
   render() {
     return (
       <AppContainer>
-
-        <ul>
-          <li><Link to="/">Home</Link></li>
-          <li><Link to="/about">About</Link></li>
-          <li><Link to="/myWords">My Words</Link></li>
-        </ul>
-
-        <AppHeader>
-          <AppLogo src={logo} alt="logo"/>
-          <span>My Words</span>
-        </AppHeader>
-
-        {this.props.children}
+        <NavBar/>
+        <Scroller>
+          <Match exactly pattern="/" component={Home} />
+          <Match pattern="/about" component={About} />
+          <Match pattern="/myWords" component={MyWords} />
+          <Miss component={NoMatch}/>
+        </Scroller>
       </AppContainer>
     );
   }
