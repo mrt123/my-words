@@ -1,6 +1,6 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
-import reactLogo from './App/logo.svg';
+import reactLogo from './img/reactLogo.svg';
 
 const rotate360 = keyframes`
   from { transform: rotate(0deg); }
