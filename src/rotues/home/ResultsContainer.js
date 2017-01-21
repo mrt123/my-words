@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import 'whatwg-fetch';
-import api from './../../api';
+import api from './../../api/api';
 import LexicalEntries from './LexicalEntries';
 import LoadingSpinner from './../../LoadingSpinner';
 import MagnifyGlass from './../../img/MagnifyGlass'
@@ -44,8 +44,8 @@ class ResultsContainer extends Component {
   }
 
   render() {
-    var activeComponent = this.state.loading ? <LoadingSpinner></LoadingSpinner> :
-      <LexicalEntries lexicalEntries={this.state.lexicalEntries}></LexicalEntries>;
+    var activeComponent = this.state.loading ? <LoadingSpinner/> :
+      <LexicalEntries entries={this.state.lexicalEntries}/>;
 
     return (
       <Result>

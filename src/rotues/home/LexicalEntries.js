@@ -5,12 +5,12 @@ import LexicalEntry from './LexicalEntry';
 const LexicalEntriesWrapper = styled.div`
 `;
 
-export default ({lexicalEntries}) => {
-  var entries = lexicalEntries.map((lexicalEntry, i)=> (
+export default ({entries}) => {
+  var lexicalEntries = entries.map((lexicalEntry, i)=> (
     <LexicalEntry key={i} entry={lexicalEntry}></LexicalEntry>
   ));
 
   return (
-    <LexicalEntriesWrapper>{entries}</LexicalEntriesWrapper>
+    <LexicalEntriesWrapper>{lexicalEntries}</LexicalEntriesWrapper>
   );
 }
