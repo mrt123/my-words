@@ -1,10 +1,23 @@
 import mockOxfordResponse from './mockOxfordAPI_ace';
+import mockMyWords from './mockMyWords';
 
 export default {
   fetchDefinition: function (word) {
     var self = this;
     return this._mockFetchDefinition(word)
       .then(self._parseResponseFromOxfordApi.bind(self));
+  },
+
+  fetchMyWords: function () {
+    return this._mockFetchMyWords();
+  },
+
+  _mockFetchMyWords: function () {
+    return new Promise(function (resolve) {
+      setTimeout(function () {
+        resolve(mockMyWords);
+      }, 500);
+    });
   },
 
   // use this to save request count on oxford API:
