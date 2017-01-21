@@ -1,5 +1,6 @@
 const resp = [
   {
+    id: 'Quixotic',
     metadata: {
       provider: ''
     },
@@ -8,7 +9,7 @@ const resp = [
         lexicalCategory: 'adjective',
         senses: [
           {
-            id: 'Quixotic',
+            id: 'Quixotic.01',
             definition: 'extremely idealistic; unrealistic and impractical:',
             examples: [
               ' vast and perhaps quixotic project'
@@ -19,6 +20,7 @@ const resp = [
     ]
   },
   {
+    id: 'Rapacious',
     metadata: {
       provider: ''
     },
@@ -27,7 +29,7 @@ const resp = [
         lexicalCategory: 'adjective',
         senses: [
           {
-            id: 'Rapacious',
+            id: 'Rapacious.01',
             definition: 'aggressively greedy or grasping',
             examples: [
               'apacious landlords'
@@ -38,6 +40,7 @@ const resp = [
     ]
   },
   {
+    id: 'Renowned',
     metadata: {
       provider: ''
     },
@@ -46,7 +49,7 @@ const resp = [
         lexicalCategory: 'adjective',
         senses: [
           {
-            id: 'Renowned',
+            id: 'Renowned.01',
             definition: 'known or talked about by many people; famous',
             examples: [
               'a renowned author',
