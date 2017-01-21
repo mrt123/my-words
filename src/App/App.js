@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import NavBar from './../NavBar';
 
 import Home from './../rotues/home/Home';
-import About from './../rotues/About';
+import Cards from './../rotues/Cards';
 import MyWords from './../rotues/MyWords';
 
 const AppContainer = styled.div`
@@ -31,7 +31,7 @@ class App extends Component {
         <NavBar/>
         <Scroller>
           <Match exactly pattern="/" component={Home} />
-          <Match pattern="/about" component={About} />
+          <Match pattern="/cards" component={Cards} />
           <Match pattern="/myWords" component={MyWords} />
           <Miss component={NoMatch}/>
         </Scroller>

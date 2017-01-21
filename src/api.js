@@ -3,7 +3,7 @@ import mockOxfordResponse from './mockOxfordAPI_ace';
 export default {
   fetchDefinition: function (word) {
     var self = this;
-    return this._fetchDefinitionFromOxfordApi(word)
+    return this._mockFetchDefinition(word)
       .then(self._parseResponseFromOxfordApi.bind(self));
   },
 

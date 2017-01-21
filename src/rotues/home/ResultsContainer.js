@@ -3,6 +3,7 @@ import 'whatwg-fetch';
 import api from './../../api';
 import LexicalEntries from './LexicalEntries';
 import LoadingSpinner from './../../LoadingSpinner';
+import MagnifyGlass from './../../img/MagnifyGlass'
 
 import styled from 'styled-components';
 
@@ -13,6 +14,7 @@ const Result = styled.div`
 class ResultsContainer extends Component {
 
   constructor() {
+    console.log(MagnifyGlass);
     super();
     this.state = {lexicalEntries: [], error: ''};
   }
