@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Search from './Search';
-import ResultsContainer from './ResultsContainer';
+import WordContainer from './WordContainer';
 
 export default class Home extends Component {
 
@@ -18,7 +18,7 @@ export default class Home extends Component {
     return (
       <div>
         <Search searchAction={this.search}></Search>
-        <ResultsContainer searchValue={this.state.searchValue}></ResultsContainer>
+        <WordContainer searchValue={this.state.searchValue}></WordContainer>
       </div>
     );
   }
