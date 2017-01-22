@@ -65,13 +65,13 @@ export default {
     else {
       var newLexicalEntries = resp.results[0].lexicalEntries.map(function (oldLexEntry) {
         return {
-          id: resp.results[0].id,
           lexicalCategory: oldLexEntry.lexicalCategory,
           senses: self._parseSenseFromOxford(oldLexEntry.entries[0].senses)
         }
       });
 
       return {
+        id: resp.results[0].id,
         metadata: resp.metadata,
         lexicalEntries: newLexicalEntries
       }
