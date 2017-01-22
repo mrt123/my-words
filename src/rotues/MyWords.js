@@ -1,5 +1,40 @@
-import React from 'react';
+import React from 'react'
+import styled from 'styled-components'
+import { Link } from 'react-router'
 
-export default ({ name, children }) => (
-  <div>My Words</div>
-)
+const Wrapper = styled.div`
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin: 10px;
+`;
+
+const WordAnchor = styled.a`
+  display: inline-block;
+  font-size: 13px;
+  text-decoration: none;
+  padding: 10px 16px;
+  color: black;
+`;
+
+const WordLink = ({ children, ...rest }) => (
+  <Link {...rest}>
+    {params =>
+      <WordAnchor {...params}>
+        {children}
+      </WordAnchor>
+    }
+  </Link>
+);
+
+export default ({ data }) => {
+  var words = data.map((word, i)=>(
+    <WordLink key={i} to={`/word/${word}`}>{word}</WordLink>
+  ));
+
+  return (
+    <Wrapper>
+      {words}
+    </Wrapper>
+  );
+}
