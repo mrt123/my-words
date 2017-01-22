@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import 'whatwg-fetch';
 import api from './../../api/api';
-import LexicalEntries from './LexicalEntries';
 import LoadingSpinner from './../../LoadingSpinner';
+import Word from './../../Word';
 
 import styled from 'styled-components';
 
@@ -14,14 +14,16 @@ class ResultsContainer extends Component {
 
   constructor() {
     super();
-    this.state = {lexicalEntries: [], error: ''};
+    this.state = {wordData: {}, error: ''};
   }
 
   componentDidMount() {
-    var wordId = this.props.params.wordId;
+    if (this.props.params) {
+      var wordId = this.props.params.wordId;
 
-    if(wordId) {
-      this.searchWord(wordId);
+      if (wordId) {
+        this.searchWord(wordId);
+      }
     }
   }
 
@@ -36,20 +38,21 @@ class ResultsContainer extends Component {
     self.setState({loading: true});
 
     api.fetchDefinition(word).then(function (resp) {
+      console.log(resp);
       self.setState({loading: false});
 
       if (resp.status === 'NOT_FOUND') {
-        self.setState({lexicalEntries: [], error: 'Word not found!'});
+        self.setState({wordData: {}, error: 'Word not found!'});
       }
       else {
-        self.setState({lexicalEntries: resp.lexicalEntries, error: ''});
+        self.setState({wordData: resp, error: ''});
       }
     });
   }
 
   render() {
     var activeComponent = this.state.loading ? <LoadingSpinner/> :
-      <LexicalEntries entries={this.state.lexicalEntries}/>;
+      <Word wordData={this.state.wordData}/>;
 
     return (
       <Result>
