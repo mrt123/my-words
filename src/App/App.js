@@ -11,12 +11,14 @@ import WordContainer from './../rotues/home/WordContainer'
 
 const AppContainer = styled.div`
   display: flex;
+  height: 100vh;
   flex-direction: column;
   justify-content: center;
 `;
 
 const Scroller = styled.div`
   overflow-y: auto;
+  flex-grow: 1;
 `;
 
 const NoMatch = ({ location }) => (

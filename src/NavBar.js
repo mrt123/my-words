@@ -7,6 +7,7 @@ import GraduationCapSvg from './img/GraduationCap'
 
 const NavBarWrapper = styled.div`
   color: #D0D6D9;
+  flex-shrink: 0;
   height: 45px;
   background-color: #2b2b2b;
   display: flex;
