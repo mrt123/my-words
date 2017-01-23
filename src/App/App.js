@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { Match, Miss } from 'react-router'
 import styled from 'styled-components';
-import NavBar from './../NavBar';
+import NavBar from './NavBar';
 
 import Home from './../rotues/home/Home';
 import Cards from './../rotues/Cards';
 import MyWordsContainer from './../rotues/MyWordsContainer';
-import WordContainer from './../rotues/home/WordContainer'
+import WordContainer from './../common/WordContainer'
 
 
 const AppContainer = styled.div`

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Search from './Search';
-import WordContainer from './WordContainer';
+import WordContainer from './../../common/WordContainer';
 
 export default class Home extends Component {
 

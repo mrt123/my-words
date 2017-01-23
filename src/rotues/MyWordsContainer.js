@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import api from './../api/api'
 import MyWords from './MyWords';
-import LoadingSpinner from './../LoadingSpinner'
+import LoadingSpinner from './../common/LoadingSpinner'
 
 class MyWordsContainer extends Component {
   constructor() {

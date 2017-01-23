@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router'
-import MagnifyGlassSvg from './img/MagnifyGlass'
-import BookSvg from './img/Book'
-import GraduationCapSvg from './img/GraduationCap'
+import MagnifyGlassSvg from './../img/MagnifyGlass'
+import BookSvg from './../img/Book'
+import GraduationCapSvg from './../img/GraduationCap'
 
 const NavBarWrapper = styled.div`
   color: #D0D6D9;
