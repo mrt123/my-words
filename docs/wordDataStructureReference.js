@@ -1,5 +1,6 @@
 var dataSample = {
   id: 'Renowned',
+  favorite: true,
   metadata: {
     provider: ''
   },

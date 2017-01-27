@@ -15,6 +15,7 @@ class ResultsContainer extends Component {
   constructor() {
     super();
     this.state = {wordData: {}, error: ''};
+    this.markFavorite = this.markFavorite.bind(this);
   }
 
   componentDidMount() {
@@ -22,23 +23,22 @@ class ResultsContainer extends Component {
       var wordId = this.props.params.wordId;
 
       if (wordId) {
-        this.searchWord(wordId);
+        this.fetchDefinition(wordId);
       }
     }
   }
 
   componentWillReceiveProps(nextProps) {
     if (this.props.searchValue !== nextProps.searchValue) {
-      this.searchWord(nextProps.searchValue);
+      this.fetchDefinition(nextProps.searchValue);
     }
   }
 
-  searchWord(word) {
+  fetchDefinition(word) {
     var self = this;
     self.setState({loading: true});
 
     api.fetchDefinition(word).then(function (resp) {
-      console.log(resp);
       self.setState({loading: false});
 
       if (resp.status === 'NOT_FOUND') {
@@ -50,9 +50,19 @@ class ResultsContainer extends Component {
     });
   }
 
+  markFavorite() {
+    var self = this;
+
+    if(this.state.wordData) {
+      return api.markWordAsFavorite(this.state.wordData).then(function (wordData) {
+        self.setState({wordData: wordData});
+      });
+    }
+  }
+
   render() {
     var activeComponent = this.state.loading ? <LoadingSpinner/> :
-      <Word wordData={this.state.wordData}/>;
+      <Word wordData={this.state.wordData} favoriteAction={this.markFavorite} />;
 
     return (
       <Result>
