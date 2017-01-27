@@ -12,6 +12,22 @@ export default {
     return this._mockFetchMyWords();
   },
 
+  markWordAsFavorite: function (wordData) {
+
+    var newFavoriteValue = !wordData.favorite;
+
+    // should take word ID and add/remove from myWords.
+    // should return updated word data.
+
+    // Mocked:
+    return  new Promise(function (resolve) {
+      setTimeout(function () {
+        wordData.favorite = newFavoriteValue;
+        resolve(wordData);
+      }, 1000)
+    });
+  },
+
   _mockFetchMyWords: function () {
     return new Promise(function (resolve) {
       setTimeout(function () {
