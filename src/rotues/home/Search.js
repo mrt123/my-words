@@ -14,6 +14,7 @@ const Input = styled.input`
   background: papayawhip;
   border: none;
   border-radius: 3px;
+  outline: none;
 
   &:hover {
     box-shadow: inset 1px 1px 2px rgba(0,0,0,0.1);
@@ -24,6 +25,7 @@ const Button = styled.button`
   background-color: #B4D1B6;
   color: white;
   border: none;
+  outline: none;
   font-size: 1.25em;
 `;
 
