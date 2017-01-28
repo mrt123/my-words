@@ -42,9 +42,9 @@ export default class extends Component {
   handleClick(e) {
     var self = this;
     this.setState({loading: true});
-    this.props.favoriteAction().then(function () {
-      self.setState({loading: false});
-    });
+    this.props.favoriteAction().then(()=>
+      self.setState({loading: false})
+    );
     e.preventDefault();
   }
 

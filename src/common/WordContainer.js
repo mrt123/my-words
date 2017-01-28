@@ -35,28 +35,25 @@ class ResultsContainer extends Component {
   }
 
   fetchDefinition(word) {
-    var self = this;
-    self.setState({loading: true});
+    this.setState({loading: true});
 
-    api.fetchDefinition(word).then(function (resp) {
-      self.setState({loading: false});
+    api.fetchDefinition(word).then(resp=> {
+      this.setState({loading: false});
 
       if (resp.status === 'NOT_FOUND') {
-        self.setState({wordData: {}, error: 'Word not found!'});
+        this.setState({wordData: {}, error: 'Word not found!'});
       }
       else {
-        self.setState({wordData: resp, error: ''});
+        this.setState({wordData: resp, error: ''});
       }
     });
   }
 
   markFavorite() {
-    var self = this;
-
     if(this.state.wordData) {
-      return api.markWordAsFavorite(this.state.wordData).then(function (wordData) {
-        self.setState({wordData: wordData});
-      });
+      return api.markWordAsFavorite(this.state.wordData).then(wordData =>
+        this.setState({wordData: wordData})
+      );
     }
   }
 
