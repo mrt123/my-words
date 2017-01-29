@@ -1,6 +1,7 @@
 import React from 'react'
 import CardFront from './CardFront'
 import CardBack from './CardBack'
+import CardWrapper from './CardWrapper'
 
 export default class extends React.Component {
 
@@ -40,6 +41,6 @@ export default class extends React.Component {
         return <CardBack wordData={wordData} nextCardAction={this.goToNext} />;
       }
     }
-    else return null;
+    else return <CardWrapper>Quiz Finished</CardWrapper>;
   }
 };
