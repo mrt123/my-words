@@ -1,5 +1,5 @@
 import React from 'react'
-import Word from './Word'
+import Word from './../../common/Word'
 import styled from 'styled-components'
 
 const Card = styled.div`

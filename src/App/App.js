@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import NavBar from './NavBar';
 
 import Home from './../rotues/home/Home';
-import CardsContainer from './../rotues/CardsContainer';
+import CardsContainer from './../rotues/cards/CardsContainer';
 import MyWordsContainer from './../rotues/MyWordsContainer';
 import WordContainer from './../common/WordContainer'
 

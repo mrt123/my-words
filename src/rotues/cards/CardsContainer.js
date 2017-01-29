@@ -1,6 +1,6 @@
 import React from 'react'
-import * as api from './../api/api'
-import Card from './../common/Card'
+import * as api from './../../api/api'
+import Card from './Card'
 
 export default class extends React.Component {
   constructor() {
