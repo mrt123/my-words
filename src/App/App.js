@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import NavBar from './NavBar';
 
 import Home from './../rotues/home/Home';
-import Cards from './../rotues/Cards';
+import CardsContainer from './../rotues/CardsContainer';
 import MyWordsContainer from './../rotues/MyWordsContainer';
 import WordContainer from './../common/WordContainer'
 
@@ -35,7 +35,7 @@ class App extends Component {
         <NavBar/>
         <Scroller>
           <Match exactly pattern="/" component={Home} />
-          <Match pattern="/cards" component={Cards} />
+          <Match pattern="/cards" component={CardsContainer} />
           <Match pattern="/myWords" component={MyWordsContainer} />
           <Match pattern="/word/:wordId" component={WordContainer}/>
           <Miss component={NoMatch}/>
