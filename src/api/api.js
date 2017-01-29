@@ -1,119 +1,121 @@
 import mockOxfordResponse from './mockOxfordAPI_ace';
 import mockMyWords from './mockMyWords';
+import mockMyUnknownWords from './mockMyUnknownWords.js';
 
-export default {
-  fetchDefinition: function (word) {
-    var self = this;
-    return this._mockFetchDefinition(word)
-      .then(self._parseResponseFromOxfordApi.bind(self));
-  },
+export let fetchMyUnknownWords = _mockFetchMyUnknownWords;
+export let fetchDefinition = _fetchDefinition;
+export let fetchMyWords = _mockFetchMyWords;
+export let markWordAsFavorite = _markWordAsFavorite;
 
-  fetchMyWords: function () {
-    return this._mockFetchMyWords();
-  },
+function _fetchDefinition(word) {
+  return _mockFetchDefinition(word)
+    .then(resp => _parseResponseFromOxfordApi(resp));
+}
 
-  markWordAsFavorite: function (wordData) {
+function _markWordAsFavorite(wordData) {
+  var newFavoriteValue = !wordData.favorite;
 
-    var newFavoriteValue = !wordData.favorite;
+  // should take word ID and add/remove from myWords.
+  // should return updated word data.
 
-    // should take word ID and add/remove from myWords.
-    // should return updated word data.
+  // Mocked:
+  return new Promise(function (resolve) {
+    setTimeout(function () {
+      wordData.favorite = newFavoriteValue;
+      resolve(wordData);
+    }, 1000)
+  });
+}
 
-    // Mocked:
-    return  new Promise(function (resolve) {
-      setTimeout(function () {
-        wordData.favorite = newFavoriteValue;
-        resolve(wordData);
-      }, 1000)
-    });
-  },
+function _fetchDefinitionFromOxfordApi(word) {
 
-  _mockFetchMyWords: function () {
-    return new Promise(function (resolve) {
-      setTimeout(function () {
-        resolve(mockMyWords);
-      }, 500);
-    });
-  },
-
-  // use this to save request count on oxford API:
-  _mockFetchDefinition: function () {
-    return new Promise(function (resolve) {
-      setTimeout(function () {
-        resolve(mockOxfordResponse);
-      }, 500);
-    });
-  },
-
-  _fetchDefinitionFromOxfordApi: function (word) {
-
-    return fetch('/api/v1/entries/en/' + word, {
-      method: 'GET',
-      headers: {
-        "Accept": "application/json",
-        "app_id": "678dcf1a",
-        "app_key": "e72043d87ba44b00ec500fa96e6dc20b"
-      }
-    })
-      .then(function (respPromise) {
-
-        if (respPromise.status === 404) {
-          return {
-            status: 'NOT_FOUND'
-          }
-
-        }
-        else {
-          return respPromise.json()
-        }
-      })
-      .catch(function (ex) {
-        console.log('parsing failed', ex)
-      })
-  },
-
-  _parseResponseFromOxfordApi: function (resp) {
-    var self = this;
-
-    if (resp.status === 'NOT_FOUND') {
-      return resp;
+  return fetch('/api/v1/entries/en/' + word, {
+    method: 'GET',
+    headers: {
+      "Accept": "application/json",
+      "app_id": "678dcf1a",
+      "app_key": "e72043d87ba44b00ec500fa96e6dc20b"
     }
-    else {
-      var newLexicalEntries = resp.results[0].lexicalEntries.map(function (oldLexEntry) {
+  })
+    .then(function (respPromise) {
+
+      if (respPromise.status === 404) {
         return {
-          lexicalCategory: oldLexEntry.lexicalCategory,
-          senses: self._parseSenseFromOxford(oldLexEntry.entries[0].senses)
+          status: 'NOT_FOUND'
         }
-      });
-
-      return {
-        id: resp.results[0].id,
-        metadata: resp.metadata,
-        lexicalEntries: newLexicalEntries
       }
-    }
-  },
-
-  _parseSenseFromOxford: function (oldSenses) {
-    var self = this;
-    return oldSenses.map(function (sense) {
-      return {
-        id: sense.id,
-        definition: sense.definitions[0],
-        examples: self._parseExamplesFromOxford(sense.examples)
+      else {
+        return respPromise.json()
       }
     })
-  },
+    .catch(function (ex) {
+      console.log('parsing failed', ex)
+    })
+}
 
-  _parseExamplesFromOxford: function (oxfordExamples) {
+// use this to save request count on oxford API:
+function _mockFetchDefinition() {
+  return new Promise(function (resolve) {
+    setTimeout(function () {
+      resolve(mockOxfordResponse);
+    }, 500);
+  });
+}
 
-    if(oxfordExamples === undefined) {
-      return [];
+function _mockFetchMyWords() {
+  return new Promise(function (resolve) {
+    setTimeout(function () {
+      resolve(mockMyWords);
+    }, 1000);
+  });
+}
+
+function _mockFetchMyUnknownWords() {
+  return new Promise(function (resolve) {
+    setTimeout(function () {
+      resolve(mockMyUnknownWords);
+    }, 500);
+  });
+}
+
+function _parseResponseFromOxfordApi(resp) {
+  if (resp.status === 'NOT_FOUND') {
+    return resp;
+  }
+  else {
+    var newLexicalEntries = resp.results[0].lexicalEntries.map(function (oldLexEntry) {
+      return {
+        lexicalCategory: oldLexEntry.lexicalCategory,
+        senses: _parseSenseFromOxford(oldLexEntry.entries[0].senses)
+      }
+    });
+
+    return {
+      id: resp.results[0].id,
+      metadata: resp.metadata,
+      lexicalEntries: newLexicalEntries
     }
-    else {
-      return oxfordExamples.map(function (example) {
-        return example.text;
-      })
+  }
+}
+
+function _parseSenseFromOxford(oldSenses) {
+  return oldSenses.map(function (sense) {
+    return {
+      id: sense.id,
+      definition: sense.definitions[0],
+      examples: _parseExamplesFromOxford(sense.examples)
     }
+  })
+}
+
+function _parseExamplesFromOxford(oxfordExamples) {
+
+  if (oxfordExamples === undefined) {
+    return [];
+  }
+  else {
+    return oxfordExamples.map(function (example) {
+      return example.text;
+    })
   }
 }
