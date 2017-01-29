@@ -1,12 +1,6 @@
 import React from 'react'
-import Word from './../../common/Word'
-import styled from 'styled-components'
-
-const Card = styled.div`
-  border: 1px solid;
-  margin: 40px;
-  padding: 10px;
-`;
+import CardFront from './CardFront'
+import CardBack from './CardBack'
 
 export default class extends React.Component {
 
@@ -40,19 +34,10 @@ export default class extends React.Component {
 
     if (wordData) {
       if (!this.state.showDef) {
-        return <Card>
-          <div>
-            {wordData.id}
-          </div>
-
-          <button onClick={this.showDef}>Show Definition</button>
-        </Card>
+        return <CardFront wordData={wordData} showAction={this.showDef} />;
       }
       else {
-        return <Card>
-          <Word wordData={wordData}/>
-          <button onClick={this.goToNext}>Next</button>
-        </Card>
+        return <CardBack wordData={wordData} nextCardAction={this.goToNext} />;
       }
     }
     else return null;
