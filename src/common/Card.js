@@ -36,21 +36,25 @@ export default class extends React.Component {
   }
 
   render() {
-    console.log(this.state)
-    if (!this.state.showDef) {
-      return <Card>
-        <div>
-          {this.props.word.id}
-        </div>
+    var wordData = this.props.word;
 
-        <button onClick={this.showDef}>Show Definition</button>
-      </Card>
+    if (wordData) {
+      if (!this.state.showDef) {
+        return <Card>
+          <div>
+            {wordData.id}
+          </div>
+
+          <button onClick={this.showDef}>Show Definition</button>
+        </Card>
+      }
+      else {
+        return <Card>
+          <Word wordData={wordData}/>
+          <button onClick={this.goToNext}>Next</button>
+        </Card>
+      }
     }
-    else {
-      return <Card>
-        <Word wordData={this.props.word}/>
-        <button onClick={this.goToNext}>Next</button>
-      </Card>
-    }
+    else return null;
   }
 };
