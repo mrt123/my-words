@@ -15,12 +15,17 @@ const WordLabel = styled.h2`
 
 export default ({ wordData, favoriteAction }) => {
 
+  var favIcon;
+  if(favoriteAction) {
+    favIcon =  <Favorite favorite={wordData.favorite} favoriteAction={favoriteAction}/>;
+  }
+
   if (wordData.id) {
     return (
       <WordWrapper>
         <WordLabel>
           {wordData.id}
-          <Favorite favorite={wordData.favorite} favoriteAction={favoriteAction}/>
+          {favIcon}
         </WordLabel>
         <LexicalEntries entries={wordData.lexicalEntries || []}/>
       </WordWrapper>
