@@ -2,10 +2,10 @@ import mockOxfordResponse from './mockOxfordAPI_ace';
 import mockMyWords from './mockMyWords';
 import mockMyUnknownWords from './mockMyUnknownWords.js';
 
-export let fetchMyUnknownWords = _mockFetchMyUnknownWords;
 export let fetchDefinition = _fetchDefinition;
 export let fetchMyWords = _mockFetchMyWords;
 export let markWordAsFavorite = _markWordAsFavorite;
+export let fetchMyUnknownWords = _mockFetchMyUnknownWords;
 
 function _fetchDefinition(word) {
   return _mockFetchDefinition(word)

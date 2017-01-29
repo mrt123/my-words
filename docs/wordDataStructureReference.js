@@ -6,7 +6,7 @@ var dataSample = {
   },
   lexicalEntries: [
     {
-      lexicalCategory: '',
+      lexicalCategory: 'adjective',
       senses: [
         {
           id: 'Renowned.01',

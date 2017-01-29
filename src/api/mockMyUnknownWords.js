@@ -6,7 +6,7 @@ var word1 = {
   },
   lexicalEntries: [
     {
-      lexicalCategory: '',
+      lexicalCategory: 'adjective',
       senses: [
         {
           id: 'Renowned.01',
@@ -29,7 +29,7 @@ var word2 = {
   },
   lexicalEntries: [
     {
-      lexicalCategory: '',
+      lexicalCategory: 'adjective',
       senses: [
         {
           id: 'Rapacious.01',
@@ -52,7 +52,7 @@ var word3 = {
   },
   lexicalEntries: [
     {
-      lexicalCategory: '',
+      lexicalCategory: 'adjective',
       senses: [
         {
           id: 'Duck.01',
