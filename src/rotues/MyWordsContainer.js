@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import api from './../api/api'
+import * as api from './../api/api';
 import MyWords from './MyWords';
 import LoadingSpinner from './../common/LoadingSpinner'
 

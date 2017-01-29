@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import 'whatwg-fetch';
-import api from './../api/api';
+import * as api from './../api/api';
 import LoadingSpinner from './LoadingSpinner';
 import Word from './Word';
 
@@ -19,6 +19,7 @@ class ResultsContainer extends Component {
   }
 
   componentDidMount() {
+
     if (this.props.params) {
       var wordId = this.props.params.wordId;
 
