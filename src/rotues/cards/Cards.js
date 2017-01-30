@@ -10,11 +10,22 @@ const Wrapper = styled.div`
 
 export default class extends React.Component {
   render() {
-    return (
-      <Wrapper>
-        <Card word={this.props.activeWord} />
-        <button onClick={this.props.nextCardAction}>Next</button>
-      </Wrapper>
-    );
+
+    if (this.props.activeWord) {
+      return (
+        <Wrapper>
+          <Card word={this.props.activeWord}/>
+          <button onClick={this.props.nextCardAction}>Next</button>
+        </Wrapper>
+      );
+    }
+    else {
+      return (
+        <div>
+          Quiz Finished
+          <button>reset</button>
+        </div>
+      )
+    }
   }
 };
