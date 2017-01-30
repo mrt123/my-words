@@ -1,46 +1,81 @@
 import React from 'react'
-import CardFront from './CardFront'
-import CardBack from './CardBack'
-import CardWrapper from './CardWrapper'
+import styled from 'styled-components'
+import Word from './../../common/Word'
+
+const Perspective = styled.div`
+  display: flex;
+  flex-grow: 1;
+  perspective: 800px;
+`;
+
+const Flipper = styled.div`
+  display: flex;
+  flex-grow: 1;
+  position: relative;
+  margin: 40px 40px 100px 40px;
+  transform-style: preserve-3d;
+  transition: transform ${props => props.speed};
+  transform: ${props => props.flipped ? 'rotateY( 180deg )' : 'rotateY( 0deg )'};
+`;
+
+const Card = styled.div`
+  cursor: pointer;
+  display: flex;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+  border-radius: 12px;
+  backface-visibility: hidden;
+  padding: 10px;
+  transform: ${props => props.flipped ? 'rotateY( 180deg )' : 'rotateY( 0deg )'};
+`;
+
+const CardFrontHeading = styled.div`
+  display: flex;
+  flex-grow: 1;
+  justify-content: center;
+  align-items: center;
+  font-size: 33px;
+  font-family: "Comic Sans MS", cursive, sans-serif;
+`;
+
+const CardFrontContent = ({wordData}) => (
+  <Card>
+    <CardFrontHeading>{wordData.id}</CardFrontHeading>
+  </Card>
+);
 
 export default class extends React.Component {
 
   constructor() {
     super();
-    this.goToNext = this.goToNext.bind(this);
-    this.state = {showDef: false};
-    this.showDef = this.showDef.bind(this);
+    this.state = {flipped: false, rotationTime: '1s'};
+    this.rotate = this.rotate.bind(this);
   }
 
-  goToNext() {
-    console.log('click');
-
-
-    // set presentation state
-    this.setState({showDef: false});
-
-    // swap data
-    this.props.nextCardAction();
-
-    // set presentation state
-
+  componentWillReceiveProps() {
+    this.setState({flipped: false, rotationTime: '0'});
   }
 
-  showDef() {
-    this.setState({showDef: true})
+  rotate(e) {
+    this.setState({rotationTime: '1s'});
+    this.state.flipped ? this.setState({flipped: false}) : this.setState({flipped: true});
+    e.preventDefault();
   }
 
   render() {
-    var wordData = this.props.word;
-
-    if (wordData) {
-      if (!this.state.showDef) {
-        return <CardFront wordData={wordData} showAction={this.showDef} />;
-      }
-      else {
-        return <CardBack wordData={wordData} nextCardAction={this.goToNext} />;
-      }
-    }
-    else return <CardWrapper>Quiz Finished</CardWrapper>;
+    return (
+      <Perspective onClick={this.rotate}>
+        <Flipper flipped={this.state.flipped} speed={this.state.rotationTime}>
+          <CardFrontContent wordData={this.props.word}/>
+          <Card flipped>
+            <Word wordData={this.props.word}/>
+          </Card>
+        </Flipper>
+      </Perspective>
+    );
   }
 };

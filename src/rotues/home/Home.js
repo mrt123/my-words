@@ -1,6 +1,11 @@
 import React, {Component} from 'react';
+import styled from 'styled-components';
 import Search from './Search';
 import WordContainer from './../../common/WordContainer';
+
+const Wrap = styled.div`
+  flex-grow: 1;
+`;
 
 export default class Home extends Component {
 
@@ -16,10 +21,10 @@ export default class Home extends Component {
 
   render () {
     return (
-      <div>
+      <Wrap>
         <Search searchAction={this.search}></Search>
         <WordContainer searchValue={this.state.searchValue}></WordContainer>
-      </div>
+      </Wrap>
     );
   }
 }

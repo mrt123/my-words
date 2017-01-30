@@ -4,6 +4,7 @@ import LexicalEntries from './LexicalEntries';
 import Favorite from './Favorite';
 
 const WordWrapper = styled.div`
+  flex-grow: 1;
 `;
 
 const WordLabel = styled.h2`

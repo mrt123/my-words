@@ -1,6 +1,6 @@
 import React from 'react'
 import * as api from './../../api/api'
-import Card from './Card'
+import Cards from './Cards'
 
 export default class extends React.Component {
   constructor() {
@@ -26,7 +26,7 @@ export default class extends React.Component {
 
   render() {
     if(this.state.words.length > 0) {
-      return <Card word={this.state.words[this.state.activeWordIndex]}
+      return <Cards activeWord={this.state.words[this.state.activeWordIndex]}
                    nextCardAction={this.stepActiveWordIndex}/>
     }
     else {

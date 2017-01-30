@@ -17,6 +17,7 @@ const AppContainer = styled.div`
 `;
 
 const Scroller = styled.div`
+  display: flex;
   overflow-y: auto;
   flex-grow: 1;
 `;
