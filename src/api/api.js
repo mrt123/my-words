@@ -8,7 +8,7 @@ export let markWordAsFavorite = _markWordAsFavorite;
 export let fetchMyUnknownWords = _mockFetchMyUnknownWords;
 
 function _fetchDefinition(word) {
-  return _mockFetchDefinition(word)
+  return _fetchDefinitionFromOxfordApi(word)
     .then(resp => _parseResponseFromOxfordApi(resp));
 }
 
@@ -29,7 +29,7 @@ function _markWordAsFavorite(wordData) {
 
 function _fetchDefinitionFromOxfordApi(word) {
 
-  return fetch('/api/v1/entries/en/' + word, {
+  return fetch('/oxfordApi/v1/entries/en/' + word, {
     method: 'GET',
     headers: {
       "Accept": "application/json",
