@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import 'whatwg-fetch';
 import * as api from './../api/api';
 import LoadingSpinner from './LoadingSpinner';
 import Word from './Word';
@@ -52,8 +51,8 @@ class ResultsContainer extends Component {
 
   markFavorite() {
     if(this.state.wordData) {
-      return api.markWordAsFavorite(this.state.wordData).then(wordData =>
-        this.setState({wordData: wordData})
+      return api.toggleWordFavorite(this.state.wordData).then(wordData =>
+        this.setState({wordData: Object.assign(this.state.wordData, wordData )})
       );
     }
   }
