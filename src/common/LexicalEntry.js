@@ -12,8 +12,8 @@ color: red;
 `;
 
 export default ({ entry }) => {
-  var senses = entry.senses.map((sense)=> {
-    return <Sense key={sense.id} definition={sense.definition} examples={sense.examples}></Sense>
+  var senses = entry.senses.map((sense, i)=> {
+    return <Sense key={i} definition={sense.definition} examples={sense.examples}></Sense>
   });
 
   return (

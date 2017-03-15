@@ -15,5 +15,5 @@ Test DB:
 
 
 #TODO: 
-* expand docker file ( https://docs.docker.com/engine/getstarted/step_four/ )
+* use compound key (word + definition) when storing favorites
 

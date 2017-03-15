@@ -9,8 +9,21 @@ export let toggleWordFavorite = _toggleWordFavorite;
 export let fetchMyUnknownWords = _mockFetchMyUnknownWords;
 
 function _fetchDefinition(word) {
-  return _fetchDefinitionFromOxfordApi(word)
-    .then(resp => _parseResponseFromOxfordApi(resp));
+  return fetch('/api/words/' + word)
+    .then(function (respPromise) {
+
+      if (respPromise.status === 404) {
+        return {
+          status: 'NOT_FOUND'
+        }
+      }
+      else {
+        return respPromise.json()
+      }
+    })
+    .catch(function (ex) {
+      console.log('parsing failed', ex)
+    })
 }
 
 function _toggleWordFavorite(wordData) {
@@ -108,7 +121,7 @@ function _parseResponseFromOxfordApi(resp) {
 function _parseSenseFromOxford(oldSenses) {
   return oldSenses.map(function (sense) {
     return {
-      id: sense.id,
+      id: sense.id,   // TODO:  might remove this id and instead use compound key (word + definition)
       definition: sense.definitions[0],
       examples: _parseExamplesFromOxford(sense.examples)
     }
