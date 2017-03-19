@@ -23,7 +23,7 @@ app.get('/api/words/:id', function (req, res) {
   });
 });
 
-app.get('/api/favorites/words/:id', function (req, res) {
+app.get('/api/favorite/words/:id', function (req, res) {
 
   var isFavoriteQueryString = 'SELECT * FROM favoriteWords where wordId="' + req.params.id + '"';
 
@@ -41,7 +41,7 @@ app.post('/api/favorite/words', function (req, res) {
     queryString = 'insert INTO favoriteWords values (19831119,"' + req.body.id + '")';
   }
   else if(!req.body.favorite) {
-    queryString = 'delete from favoriteWords where userId=19831119 and word="'+ req.body.id + '"';
+    queryString = 'delete from favoriteWords where userId=19831119 and wordId="'+ req.body.id + '"';
   }
 
   console.log(queryString);

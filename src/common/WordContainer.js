@@ -24,6 +24,7 @@ class ResultsContainer extends Component {
 
       if (wordId) {
         this.fetchWord(wordId);
+        this.fetchFavoriteByWordId(wordId);
       }
     }
   }
@@ -31,11 +32,13 @@ class ResultsContainer extends Component {
   componentWillReceiveProps(nextProps) {
     if (this.props.searchValue !== nextProps.searchValue) {
       this.fetchWord(nextProps.searchValue);
+      this.fetchFavoriteByWordId(nextProps.searchValue);
     }
   }
 
   fetchWord(wordId) {
     this.setState({loading: true});
+    this.setState({loadingWord: true});
 
     api.fetchDefinition(wordId).then(resp=> {
       this.setState({loading: false});
@@ -44,8 +47,18 @@ class ResultsContainer extends Component {
         this.setState({wordData: {}, error: 'Word not found!'});
       }
       else {
-        this.setState({wordData: resp, error: ''});
+        this.setState({wordData: Object.assign(this.state.wordData, resp ), error: ''});
       }
+    });
+  }
+
+  fetchFavoriteByWordId(wordId) {
+    this.setState({loading: true});
+    this.setState({loadingFavorite: true});
+
+    api.fetchFavoriteByWordId(wordId).then(resp=> {
+      this.setState({loading: false});
+      this.setState({wordData: Object.assign(this.state.wordData, resp )});
     });
   }
 

@@ -4,6 +4,7 @@ import 'whatwg-fetch';
 
 export let fetchDefinition = _fetchDefinition;
 export let fetchMyWords = _mockFetchMyWords;
+export let fetchFavoriteByWordId = _fetchFavoriteByWordId;
 export let toggleWordFavorite = setFavoriteEntry;
 export let fetchMyUnknownWords = _mockFetchMyUnknownWords;
 
@@ -25,6 +26,24 @@ function _fetchDefinition(word) {
     })
 }
 
+function _fetchFavoriteByWordId(wordId) {
+  return fetch('/api/favorite/words/' + wordId)
+    .then(function (respPromise) {
+
+      if (respPromise.status === 404) {
+        return {
+          status: 'NOT_FOUND'
+        }
+      }
+      else {
+        return respPromise.json(); // TODO: include error report in same format on backend!
+      }
+    })
+    .catch(function (ex) {
+      console.log('parsing failed', ex)
+    })
+}
+
 function setFavoriteEntry(wordData) {
 
   return fetch("/api/favorite/words/",
@@ -35,7 +54,7 @@ function setFavoriteEntry(wordData) {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        id: wordData.id,
+        id: wordData.wordId,
         favorite: !wordData.favorite
       })
     })
