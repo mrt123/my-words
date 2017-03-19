@@ -21,11 +21,11 @@ export default ({ wordData, favoriteAction }) => {
     favIcon =  <Favorite favorite={wordData.favorite} favoriteAction={favoriteAction}/>;
   }
 
-  if (wordData.id) {
+  if (wordData.wordId) {
     return (
       <WordWrapper>
         <WordLabel>
-          {wordData.id}
+          {wordData.wordId}
           {favIcon}
         </WordLabel>
         <LexicalEntries entries={wordData.lexicalEntries || []}/>

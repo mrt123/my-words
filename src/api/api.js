@@ -4,7 +4,7 @@ import 'whatwg-fetch';
 
 export let fetchDefinition = _fetchDefinition;
 export let fetchMyWords = _mockFetchMyWords;
-export let toggleWordFavorite = _toggleWordFavorite;
+export let toggleWordFavorite = setFavoriteEntry;
 export let fetchMyUnknownWords = _mockFetchMyUnknownWords;
 
 function _fetchDefinition(word) {
@@ -25,13 +25,9 @@ function _fetchDefinition(word) {
     })
 }
 
-function _toggleWordFavorite(wordData) {
-  var newFavoriteValue = !wordData.favorite;
+function setFavoriteEntry(wordData) {
 
-  //  take word ID and favorite value
-  //  return favorite value.
-
-  return fetch("/api/favorites/",
+  return fetch("/api/favorite/words/",
     {
       method: "POST",
       headers: {
@@ -40,7 +36,7 @@ function _toggleWordFavorite(wordData) {
       },
       body: JSON.stringify({
         id: wordData.id,
-        favorite: newFavoriteValue
+        favorite: !wordData.favorite
       })
     })
     .then((r)=> r.json());

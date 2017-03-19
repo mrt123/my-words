@@ -14,6 +14,16 @@ Test DB:
 * See logs : `docker logs my-words-db1`
 
 
-#TODO: 
-* use compound key (word + definition) when storing favorites
+Useful Queries:
+* see entries with favorites column based on favoriteWords table [deprecated]:
+``` 
+var isFavoriteQueryString = 'SELECT if(COUNT(*)>0,"true","false") FROM favoriteWords where word="' + req.params.id + '"';
+
+var selectFromEntriesQueryString = 'select *, (' + isFavoriteQueryString + ') AS favorite from entries where word="' + req.params.id + '"';
+
+```
+
+
+#Road-map: 
+* implement concept of favorite word (only if word has its own table!).
 

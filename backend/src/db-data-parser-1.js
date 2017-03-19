@@ -2,7 +2,7 @@ exports.parseWord = parseWordFromDatabaseRows;
 
 function parseWordFromDatabaseRows(rows) {
   return {
-    id: rows[0].word,
+    wordId: rows[0].wordId,
     metadata: 'from https://sourceforge.net/projects/mysqlenglishdictionary/files/englishdictionary.sql/download',
     lexicalEntries: parseLexicalEntriesFromRows(rows)
   }
@@ -12,8 +12,6 @@ function parseLexicalEntriesFromRows(rows) {
 
   var rowsWithRemappedWordTypes = rows.map((r)=>{
     return {
-      id: r.id,
-      word: r.word,
       wordtype: getWordTypeFromAbbreviation(r.wordtype),
       definition: r.definition
     }
