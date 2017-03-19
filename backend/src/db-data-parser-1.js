@@ -1,29 +1,28 @@
-exports.parseWord = _parseWordFromDatabaseRows;
+exports.parseWord = parseWordFromDatabaseRows;
 
-function _parseWordFromDatabaseRows(rows) {
+function parseWordFromDatabaseRows(rows) {
   return {
     id: rows[0].word,
     metadata: 'from https://sourceforge.net/projects/mysqlenglishdictionary/files/englishdictionary.sql/download',
-    lexicalEntries: _parseLexicalEntriesFromRows(rows)
+    lexicalEntries: parseLexicalEntriesFromRows(rows)
   }
 }
 
-function _parseLexicalEntriesFromRows(rows) {
+function parseLexicalEntriesFromRows(rows) {
 
   var rowsWithRemappedWordTypes = rows.map((r)=>{
     return {
       word: r.word,
-      wordtype: _getLexicalCategoryFromAbbreviation(r.wordtype),
+      wordtype: getWordTypeFromAbbreviation(r.wordtype),
       definition: r.definition
     }
   });
 
-  var uniqueWordTypes = getWordTypesFromRows(rowsWithRemappedWordTypes);
-  console.log(getUniqueValuesFromArray(uniqueWordTypes));
+  var uniqueWordTypes = getUniqueWordTypesFromRows(rowsWithRemappedWordTypes);
   return uniqueWordTypes.map(function (wordType) {
     return {
       lexicalCategory: wordType,
-      senses: _getSensesFromRowsForLexicalCategory(rowsWithRemappedWordTypes, wordType)
+      senses: getSensesFromRowsForWordType(rowsWithRemappedWordTypes, wordType)
     }
   });
 }
@@ -36,7 +35,7 @@ function getUniqueValuesFromArray(rows) {
   return rows.filter(onlyUnique);
 }
 
-function getWordTypesFromRows(rows) {
+function getUniqueWordTypesFromRows(rows) {
   function onlyUnique(row, index, self) {
     return self.indexOf(row) === index;
   }
@@ -46,9 +45,9 @@ function getWordTypesFromRows(rows) {
   }).filter(onlyUnique);    // use loadash?
 }
 
-function _getSensesFromRowsForLexicalCategory(rows, category) {
+function getSensesFromRowsForWordType(rows, wordType) {
   return rows.filter(function (row) {
-    return row.wordtype === category;
+    return row.wordtype === wordType;
   }).map(function (row) {
     return {
       definition: row.definition,
@@ -57,10 +56,11 @@ function _getSensesFromRowsForLexicalCategory(rows, category) {
   });
 }
 
-function _getLexicalCategoryFromAbbreviation(categoryAbbreviation) {
+function getWordTypeFromAbbreviation(categoryAbbreviation) {
   if (categoryAbbreviation === 'v.') return 'verb';
   if (categoryAbbreviation === 'v. t.') return 'verb';
   if (categoryAbbreviation === 'v. i.') return 'verb';
   if (categoryAbbreviation === 'n.') return 'noun';
   if (categoryAbbreviation === 'a.') return 'adjective';
+  else return categoryAbbreviation;
 }
