@@ -12,6 +12,7 @@ function parseLexicalEntriesFromRows(rows) {
 
   var rowsWithRemappedWordTypes = rows.map((r)=>{
     return {
+      id: r.id,
       word: r.word,
       wordtype: getWordTypeFromAbbreviation(r.wordtype),
       definition: r.definition
@@ -50,6 +51,7 @@ function getSensesFromRowsForWordType(rows, wordType) {
     return row.wordtype === wordType;
   }).map(function (row) {
     return {
+      id: row.id,
       definition: row.definition,
       examples: []
     }
