@@ -28,13 +28,18 @@ const WordLink = ({ children, ...rest }) => (
 );
 
 export default ({ data }) => {
-  var words = data.map((word, i)=>(
-    <WordLink key={i} to={`/word/${word}`}>{word}</WordLink>
-  ));
 
-  return (
-    <Wrapper>
-      {words}
-    </Wrapper>
-  );
+  if(data.length > 0) {
+    var words = data.map((word, i)=>(
+      <WordLink key={i} to={`/word/${word}`}>{word}</WordLink>
+    ));
+    return (
+      <Wrapper>
+        {words}
+      </Wrapper>
+    )
+  }
+  else {
+    return <Wrapper>You don't have any words saved</Wrapper>;
+  }
 }

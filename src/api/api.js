@@ -1,9 +1,8 @@
-import mockMyWords from './mockMyWords';
 import mockMyUnknownWords from './mockMyUnknownWords.js';
 import 'whatwg-fetch';
 
 export let fetchDefinition = _fetchDefinition;
-export let fetchMyWords = _mockFetchMyWords;
+export let fetchMyWords = _fetchMyWords;
 export let fetchFavoriteByWordId = _fetchFavoriteByWordId;
 export let toggleWordFavorite = setFavoriteEntry;
 export let fetchMyUnknownWords = _mockFetchMyUnknownWords;
@@ -61,12 +60,22 @@ function setFavoriteEntry(wordData) {
     .then((r)=> r.json());
 }
 
-function _mockFetchMyWords() {
-  return new Promise(function (resolve) {
-    setTimeout(function () {
-      resolve(mockMyWords);
-    }, 1000);
-  });
+function _fetchMyWords() {
+  return fetch('/api/favorite/words/')
+    .then(function (respPromise) {
+
+      if (respPromise.status === 404) {
+        return {
+          status: 'NOT_FOUND'
+        }
+      }
+      else {
+        return respPromise.json();
+      }
+    })
+    .catch(function (ex) {
+      console.log('parsing failed', ex)
+    })
 }
 
 function _mockFetchMyUnknownWords() {

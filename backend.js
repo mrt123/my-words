@@ -23,25 +23,21 @@ app.get('/api/words/:id', function (req, res) {
   });
 });
 
-app.get('/api/favorite/words/:id', function (req, res) {
+app.get('/api/favorite/words', function (req, res) {
 
-  var isFavoriteQueryString = 'SELECT * FROM favoriteWords where wordId="' + req.params.id + '"';
-
-  dbQuery(isFavoriteQueryString).then(function (rows) {
-    res.send({
-      favorite: rows.length > 0
-    });
+  dbQuery('select * from favoriteWords where userId="' + '19831119' + '"').then(function (rows) {
+    res.send(rows.map((r)=> r.wordId));
   });
 });
 
 app.post('/api/favorite/words', function (req, res) {
   var queryString;
 
-  if(req.body.favorite) {
+  if (req.body.favorite) {
     queryString = 'insert INTO favoriteWords values (19831119,"' + req.body.id + '")';
   }
-  else if(!req.body.favorite) {
-    queryString = 'delete from favoriteWords where userId=19831119 and wordId="'+ req.body.id + '"';
+  else if (!req.body.favorite) {
+    queryString = 'delete from favoriteWords where userId=19831119 and wordId="' + req.body.id + '"';
   }
 
   console.log(queryString);
@@ -55,6 +51,17 @@ app.post('/api/favorite/words', function (req, res) {
     else {
       res.status(500).send('DB QUERY ERROR');
     }
+  });
+});
+
+app.get('/api/favorite/words/:id', function (req, res) {
+
+  var isFavoriteQueryString = 'SELECT * FROM favoriteWords where wordId="' + req.params.id + '"';
+
+  dbQuery(isFavoriteQueryString).then(function (rows) {
+    res.send({
+      favorite: rows.length > 0
+    });
   });
 });
 
