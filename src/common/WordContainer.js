@@ -23,21 +23,21 @@ class ResultsContainer extends Component {
       var wordId = this.props.params.wordId;
 
       if (wordId) {
-        this.fetchDefinition(wordId);
+        this.fetchWord(wordId);
       }
     }
   }
 
   componentWillReceiveProps(nextProps) {
     if (this.props.searchValue !== nextProps.searchValue) {
-      this.fetchDefinition(nextProps.searchValue);
+      this.fetchWord(nextProps.searchValue);
     }
   }
 
-  fetchDefinition(word) {
+  fetchWord(wordId) {
     this.setState({loading: true});
 
-    api.fetchDefinition(word).then(resp=> {
+    api.fetchDefinition(wordId).then(resp=> {
       this.setState({loading: false});
 
       if (resp.status === 'NOT_FOUND') {
