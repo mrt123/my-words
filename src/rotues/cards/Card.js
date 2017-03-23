@@ -19,6 +19,7 @@ const Flipper = styled.div`
 `;
 
 const Card = styled.div`
+  overflow-y: scroll;
   cursor: pointer;
   display: flex;
   position: absolute;
@@ -44,7 +45,7 @@ const CardFrontHeading = styled.div`
 
 const CardFrontContent = ({wordData}) => (
   <Card>
-    <CardFrontHeading>{wordData.id}</CardFrontHeading>
+    <CardFrontHeading>{wordData.wordId}</CardFrontHeading>
   </Card>
 );
 
