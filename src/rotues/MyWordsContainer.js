@@ -15,7 +15,7 @@ class MyWordsContainer extends Component {
 
   getWords() {
     this.setState({loading: true});
-    api.fetchMyWords().then(words => {
+    api.fetchMyWordsIds().then(words => {
       this.setState({words: words, loading: false});
     });
   }

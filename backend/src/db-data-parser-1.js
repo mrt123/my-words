@@ -2,9 +2,13 @@ exports.parseWord = parseWordFromDatabaseRows;
 
 function parseWordFromDatabaseRows(rows) {
   return {
-    wordId: rows[0].wordId,
-    metadata: 'from https://sourceforge.net/projects/mysqlenglishdictionary/files/englishdictionary.sql/download',
-    lexicalEntries: parseLexicalEntriesFromRows(rows)
+
+    word :{
+      wordId: rows[0].wordId,
+      metadata: 'from https://sourceforge.net/projects/mysqlenglishdictionary/files/englishdictionary.sql/download',
+      lexicalEntries: parseLexicalEntriesFromRows(rows)
+    },
+    error: ''
   }
 }
 

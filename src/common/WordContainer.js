@@ -9,78 +9,60 @@ const Result = styled.div`
   margin: 30px 10px;
 `;
 
-class ResultsContainer extends Component {
+class WordContainer extends Component {
 
   constructor() {
     super();
-    this.state = {wordData: {}, error: ''};
-    this.markFavorite = this.markFavorite.bind(this);
+    this.state = {wordData: { word: {}, error: '' }};
   }
 
   componentDidMount() {
-
-    if (this.props.params) {
-      var wordId = this.props.params.wordId;
-
-      if (wordId) {
-        this.fetchWord(wordId);
-        this.fetchFavoriteByWordId(wordId);
-      }
-    }
+    this.handleRouteParams();
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.searchValue !== nextProps.searchValue) {
-      this.fetchWord(nextProps.searchValue);
-      this.fetchFavoriteByWordId(nextProps.searchValue);
+    this.fetchWord(nextProps.wordId);
+  }
+
+  handleRouteParams() {
+    if (this.props.params && this.props.params.wordId) {
+      this.fetchWord(this.props.params.wordId);
     }
   }
 
   fetchWord(wordId) {
     this.setState({loading: true});
-    this.setState({loadingWord: true});
 
     api.fetchDefinition(wordId).then(resp=> {
-      this.setState({loading: false});
-
-      if (resp.status === 'NOT_FOUND') {
-        this.setState({wordData: {}, error: 'Word not found!'});
-      }
-      else {
-        this.setState({wordData: Object.assign(this.state.wordData, resp ), error: ''});
-      }
+      this.setState({loading: false, wordData: resp});
     });
-  }
-
-  fetchFavoriteByWordId(wordId) {
-    this.setState({loading: true});
-    this.setState({loadingFavorite: true});
-
-    api.fetchFavoriteByWordId(wordId).then(resp=> {
-      this.setState({loading: false});
-      this.setState({wordData: Object.assign(this.state.wordData, resp )});
-    });
-  }
-
-  markFavorite() {
-    if(this.state.wordData) {
-      return api.toggleWordFavorite(this.state.wordData).then(wordData =>
-        this.setState({wordData: Object.assign(this.state.wordData, wordData )})
-      );
-    }
   }
 
   render() {
-    var activeComponent = this.state.loading ? <LoadingSpinner/> :
-      <Word wordData={this.state.wordData} favoriteAction={this.markFavorite} />;
 
+    // TODO : remove all rendering relating to loading and move to <Word>.
+    // TODO: remove all error handling (backend should provide consistent error format;
+
+    var activeComponent;
+    if(this.state.loading) {
+      activeComponent = <LoadingSpinner size="{80}"/>;
+    }
+    else {
+      activeComponent = <Word wordData={this.state.wordData}/>;
+    }
+
+    var error = '';
+    if(this.state.wordData.error) {
+      error = this.state.wordData.error;
+    }
+    
     return (
       <Result>
-        {this.state.error}
+        {error}
         {activeComponent}
       </Result>
     );
   }
 }
 
-export default ResultsContainer;
+export default WordContainer;

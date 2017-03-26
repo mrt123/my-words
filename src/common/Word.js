@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import LexicalEntries from './LexicalEntries';
-import Favorite from './Favorite';
+import FavoriteContainer from './FavoriteContainer.js';
 
 const WordWrapper = styled.div`
   flex-grow: 1;
@@ -14,21 +14,18 @@ const WordLabel = styled.h2`
   justify-content: center;
 `;
 
-export default ({ wordData, favoriteAction }) => {
+export default function Word2({ wordData }) {
+  var word = wordData.word;
+  var wordId = word.wordId;
 
-  var favIcon;
-  if(favoriteAction) {
-    favIcon =  <Favorite favorite={wordData.favorite} favoriteAction={favoriteAction}/>;
-  }
-
-  if (wordData.wordId) {
+  if (wordId) {
     return (
       <WordWrapper>
         <WordLabel>
-          {wordData.wordId}
-          {favIcon}
+          {wordId}
+          <FavoriteContainer wordId={wordId}/>
         </WordLabel>
-        <LexicalEntries entries={wordData.lexicalEntries || []}/>
+        <LexicalEntries entries={word.lexicalEntries}/>
       </WordWrapper>
     )
   }

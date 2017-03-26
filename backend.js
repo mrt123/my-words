@@ -33,20 +33,24 @@ app.get('/api/favorite/words', function (req, res) {
 app.post('/api/favorite/words', function (req, res) {
   var queryString;
 
-  if (req.body.favorite) {
-    queryString = 'insert INTO favoriteWords values (19831119,"' + req.body.id + '")';
+  if (req.body.isFavorite) {
+    queryString = 'insert INTO favoriteWords values (19831119,"' + req.body.wordId + '")';
   }
-  else if (!req.body.favorite) {
-    queryString = 'delete from favoriteWords where userId=19831119 and wordId="' + req.body.id + '"';
+  else if (!req.body.isFavorite) {
+    queryString = 'delete from favoriteWords where userId=19831119 and wordId="' + req.body.wordId + '"';
   }
 
   console.log(queryString);
   dbQuery(queryString).then(function (dbResp) {
 
     if (dbResp.affectedRows > 0) {
-      res.send({
-        favorite: req.body.favorite
-      });
+
+      setTimeout(function () {
+        res.send({
+          wordId: req.body.wordId,
+          isFavorite: req.body.isFavorite
+        });
+      }, 500);
     }
     else {
       res.status(500).send('DB QUERY ERROR');
@@ -60,7 +64,8 @@ app.get('/api/favorite/words/:id', function (req, res) {
 
   dbQuery(isFavoriteQueryString).then(function (rows) {
     res.send({
-      favorite: rows.length > 0
+      wordId: req.params.id,
+      isFavorite: rows.length > 0
     });
   });
 });

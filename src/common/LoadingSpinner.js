@@ -14,12 +14,11 @@ const SpinnerWrapper = styled.div`
 `;
 
 const Spinner = styled.img`
-  width: 80px;
   animation: ${rotate360} 2s linear infinite;
 `;
 
-export default () => (
+export default ({size}) => (
   <SpinnerWrapper src={reactLogo}>
-    <Spinner src={reactLogo}></Spinner>
+    <Spinner src={reactLogo} size={size}></Spinner>
   </SpinnerWrapper>
 );

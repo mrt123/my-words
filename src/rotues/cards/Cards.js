@@ -8,13 +8,12 @@ const Wrapper = styled.div`
   flex-direction: column;
 `;
 
-export default class extends React.Component {
+export default class Cards extends React.Component {
   render() {
-
-    if (this.props.activeWord) {
+    if (this.props.activeWordId) {
       return (
         <Wrapper>
-          <Card word={this.props.activeWord}/>
+          <Card activeWordId={this.props.activeWordId}/>
           <button onClick={this.props.nextCardAction}>Next</button>
         </Wrapper>
       );

@@ -1,13 +1,7 @@
-import mockMyUnknownWords from './mockMyUnknownWords.js';
 import 'whatwg-fetch';
 
-export let fetchDefinition = _fetchDefinition;
-export let fetchMyWords = _fetchMyWords;
-export let fetchFavoriteByWordId = _fetchFavoriteByWordId;
-export let toggleWordFavorite = setFavoriteEntry;
-export let fetchMyUnknownWords = _mockFetchMyUnknownWords;
-
-function _fetchDefinition(word) {
+// must handle 500 & 404 in case if backend fails to handle it!
+export function fetchDefinition(word) {
   return fetch('/api/words/' + word)
     .then(function (respPromise) {
 
@@ -25,7 +19,7 @@ function _fetchDefinition(word) {
     })
 }
 
-function _fetchFavoriteByWordId(wordId) {
+export function fetchFavoriteByWordId(wordId) {
   return fetch('/api/favorite/words/' + wordId)
     .then(function (respPromise) {
 
@@ -43,8 +37,7 @@ function _fetchFavoriteByWordId(wordId) {
     })
 }
 
-function setFavoriteEntry(wordData) {
-
+export function toggleFavoriteByWordId(newFavValue, wordId) {
   return fetch("/api/favorite/words/",
     {
       method: "POST",
@@ -53,14 +46,14 @@ function setFavoriteEntry(wordData) {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        id: wordData.wordId,
-        favorite: !wordData.favorite
+        wordId: wordId,
+        isFavorite: newFavValue
       })
     })
     .then((r)=> r.json());
 }
 
-function _fetchMyWords() {
+export function fetchMyWordsIds() {
   return fetch('/api/favorite/words/')
     .then(function (respPromise) {
 
@@ -76,12 +69,4 @@ function _fetchMyWords() {
     .catch(function (ex) {
       console.log('parsing failed', ex)
     })
-}
-
-function _mockFetchMyUnknownWords() {
-  return new Promise(function (resolve) {
-    setTimeout(function () {
-      resolve(mockMyUnknownWords);
-    }, 500);
-  });
 }

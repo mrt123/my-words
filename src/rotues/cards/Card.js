@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import Word from './../../common/Word'
+import WordContainer from './../../common/WordContainer.js'
 
 const Perspective = styled.div`
   display: flex;
@@ -43,13 +43,13 @@ const CardFrontHeading = styled.div`
   font-family: "Comic Sans MS", cursive, sans-serif;
 `;
 
-const CardFrontContent = ({wordData}) => (
+const CardFrontContent = ({wordId}) => (
   <Card>
-    <CardFrontHeading>{wordData.wordId}</CardFrontHeading>
+    <CardFrontHeading>{wordId}</CardFrontHeading>
   </Card>
 );
 
-export default class extends React.Component {
+export default class Cards extends React.Component {
 
   constructor() {
     super();
@@ -71,9 +71,9 @@ export default class extends React.Component {
     return (
       <Perspective onClick={this.rotate}>
         <Flipper flipped={this.state.flipped} speed={this.state.rotationTime}>
-          <CardFrontContent wordData={this.props.word}/>
+          <CardFrontContent wordId={this.props.activeWordId}/>
           <Card flipped>
-            <Word wordData={this.props.word}/>
+            <WordContainer wordId={this.props.activeWordId}/>
           </Card>
         </Flipper>
       </Perspective>

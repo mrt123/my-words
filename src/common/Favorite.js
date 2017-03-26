@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import styled, { keyframes } from 'styled-components';
 import StarFilledSvg from './../img/StarFilled'
 import StarEmptySvg from './../img/StarEmpty'
@@ -32,27 +32,14 @@ const Spinner = styled.div`
   animation: ${rotate360} 0.5s linear infinite;
 `;
 
-export default class extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {favorite: '', loading: false};
-    this.handleClick = this.handleClick.bind(this);
+export default ({ loading, favoriteData, favoriteAction }) => {
+  var icon;
+  if (loading) {
+    icon = <Spinner>x</Spinner>
+  }
+  else {
+    icon = favoriteData.isFavorite ? <StarFilledIcon/> : <StarEmptyIcon/>
   }
 
-  handleClick(e) {
-    var self = this;
-    this.setState({loading: true});
-    this.props.favoriteAction().then(()=>
-      self.setState({loading: false})
-    );
-    e.preventDefault();
-  }
-
-  render() {
-    var icon = this.props.favorite ? <StarFilledIcon/> : <StarEmptyIcon/>;
-    if (this.state.loading) {
-      icon = <Spinner>{icon}</Spinner>
-    }
-    return <FavoriteContainer onClick={this.handleClick}>{icon}</FavoriteContainer>
-  }
+  return <FavoriteContainer onClick={favoriteAction}>{icon}</FavoriteContainer>
 }

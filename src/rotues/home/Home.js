@@ -23,7 +23,7 @@ export default class Home extends Component {
     return (
       <Wrap>
         <Search searchAction={this.search}></Search>
-        <WordContainer searchValue={this.state.searchValue}></WordContainer>
+        <WordContainer wordId={this.state.searchValue}></WordContainer>
       </Wrap>
     );
   }
