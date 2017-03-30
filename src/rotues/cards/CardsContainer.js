@@ -1,7 +1,6 @@
 import React from 'react'
 import * as api from './../../api/api'
 import Cards from './Cards'
-import LoadingSpinner from '../../common/LoadingSpinner';
 
 export default class extends React.Component {  // TODO: remove duplication with myWordsContainer.
   constructor() {
@@ -25,11 +24,6 @@ export default class extends React.Component {  // TODO: remove duplication with
   }
 
   render() {
-    if (this.state.loading) {
-      return <LoadingSpinner/>;   // TODO: remove loading related rendering from Container Component!
-    }
-    else {
-      return <Cards activeWordId={this.state.activeWordId} nextCardAction={this.setActiveWordId}/>
-    }
+    return <Cards activeWordId={this.state.activeWordId} loading={this.state.loading} nextCardAction={this.setActiveWordId}/>
   }
 }

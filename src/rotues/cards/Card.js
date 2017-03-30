@@ -67,7 +67,7 @@ export default class Cards extends React.Component {
     e.preventDefault();
   }
 
-  render() {
+  render() {  // TODO: provide loading animation to CardFrontContent
     return (
       <Perspective onClick={this.rotate}>
         <Flipper flipped={this.state.flipped} speed={this.state.rotationTime}>
