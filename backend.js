@@ -7,7 +7,7 @@ var dbQuery = require('./backend/src/db-connection').query;
 app.use(bodyParser.json());
 
 app.use('/', function (req, res, next) {
-  console.log(req.method + ' : ' + req.originalUrl);
+  console.log('--> [' + req.method + '] : ' + req.originalUrl);
   next();
 });
 
@@ -40,17 +40,13 @@ app.post('/api/favorite/words', function (req, res) {
     queryString = 'delete from favoriteWords where userId=19831119 and wordId="' + req.body.wordId + '"';
   }
 
-  console.log(queryString);
   dbQuery(queryString).then(function (dbResp) {
 
     if (dbResp.affectedRows > 0) {
-
-      setTimeout(function () {
-        res.send({
-          wordId: req.body.wordId,
-          isFavorite: req.body.isFavorite
-        });
-      }, 500);
+      res.send({
+        wordId: req.body.wordId,
+        isFavorite: req.body.isFavorite
+      });
     }
     else {
       res.status(500).send('DB QUERY ERROR');

@@ -5,7 +5,8 @@ exports.query = query;
 
 function query(queryString) {
   return createConnection().then(function (conn) {
-    return conn.query(queryString);
+    console.log('----> ', queryString);
+    return conn.query(queryString).delay(500);
   });
 }
 
