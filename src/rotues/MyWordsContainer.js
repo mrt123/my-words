@@ -21,14 +21,7 @@ class MyWordsContainer extends Component {
   }
 
   render() {
-    var activeComponent = this.state.loading ? <LoadingSpinner/> :
-      <MyWords data={this.state.words}/>;
-
-    return (
-      <div>
-        {activeComponent}
-      </div>
-    )
+    return this.state.loading ? <LoadingSpinner/> : <MyWords data={this.state.words}/>;
   }
 }
 

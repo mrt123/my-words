@@ -62,8 +62,7 @@ export default class Cards extends React.Component {
   }
 
   rotate(e) {
-    this.setState({rotationTime: '1s'});
-    this.state.flipped ? this.setState({flipped: false}) : this.setState({flipped: true});
+    this.setState({flipped: !this.state.flipped, rotationTime: '1s'});
     e.preventDefault();
   }
 

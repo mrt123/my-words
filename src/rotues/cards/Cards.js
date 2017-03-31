@@ -12,8 +12,10 @@ const Wrapper = styled.div`
 export default class Cards extends React.Component {
   render() {
 
-    if (this.props.loading) {   // TODO: Figure out why loading does not show
-      return <LoadingSpinner/>;
+    if (this.props.loading) {
+      return (
+          <LoadingSpinner/>
+      );
     }
     else if (this.props.activeWordId) {
       return (
