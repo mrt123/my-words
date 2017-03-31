@@ -16,7 +16,8 @@ class FavContainer extends Component {
     api.fetchFavoriteByWordId(this.props.wordId).then(this.reactToData);
   }
 
-  setFavorite() {
+  setFavorite(e) {
+    e.stopPropagation();
     this.setState({loading: true});
     var oldFavData = this.state.favoriteData;
     var newFavValue = !oldFavData.isFavorite;

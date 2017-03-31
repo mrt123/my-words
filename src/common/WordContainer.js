@@ -7,21 +7,28 @@ import styled from 'styled-components';
 
 const Result = styled.div`
   margin: 30px 10px;
+  display: flex;
+  flex-grow: 1;
 `;
 
 class WordContainer extends Component {
 
   constructor() {
     super();
-    this.state = {wordData: { word: {}, error: '' }};
+    this.state = {wordData: {word: {}, error: ''}};
   }
 
   componentDidMount() {
     this.handleRouteParams();
+    if(this.props.wordId) {
+      this.fetchWord(this.props.wordId);
+    }
   }
 
-  componentWillReceiveProps(nextProps) {
-    this.fetchWord(nextProps.wordId);
+  componentWillReceiveProps(nextProps) {  console.log('old: ' + this.props.wordId, 'new: ' + nextProps.wordId)
+    if(this.props.wordId !== nextProps.wordId) {        console.log('WordContainer: props recieived ')
+      this.fetchWord(nextProps.wordId);
+    }
   }
 
   handleRouteParams() {
@@ -44,7 +51,7 @@ class WordContainer extends Component {
     // TODO: remove all error handling (backend should provide consistent error format;
 
     var activeComponent;
-    if(this.state.loading) {
+    if (this.state.loading) {
       activeComponent = <LoadingSpinner size="{80}"/>;
     }
     else {
@@ -52,10 +59,10 @@ class WordContainer extends Component {
     }
 
     var error = '';
-    if(this.state.wordData.error) {
+    if (this.state.wordData.error) {
       error = this.state.wordData.error;
     }
-    
+
     return (
       <Result>
         {error}

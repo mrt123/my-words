@@ -9,6 +9,7 @@ const rotate360 = keyframes`
 
 const SpinnerWrapper = styled.div`
   display: flex;
+  flex-grow: 1;
   justify-content: center;
   margin: 10px;
 `;
@@ -18,7 +19,7 @@ const Spinner = styled.img`
 `;
 
 export default ({size}) => (
-  <SpinnerWrapper src={reactLogo}>
+  <SpinnerWrapper>
     <Spinner src={reactLogo} size={size}></Spinner>
   </SpinnerWrapper>
 );
