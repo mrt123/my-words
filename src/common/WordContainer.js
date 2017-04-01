@@ -6,25 +6,21 @@ class WordContainer extends Component {
 
   constructor() {
     super();
-    this.state = {wordData: {word: {}, error: ''}, loading: true};
+    this.state = {
+      wordData: {word: {}, error: ''},
+      loading: true
+    };
   }
 
   componentDidMount() {
-    this.handleRouteParams();
-    if(this.props.wordId) {
+    if (this.props.wordId) {
       this.fetchWord(this.props.wordId);
     }
   }
 
   componentWillReceiveProps(nextProps) {
-    if(this.props.wordId !== nextProps.wordId) {
+    if (this.props.wordId !== nextProps.wordId) {
       this.fetchWord(nextProps.wordId);
-    }
-  }
-
-  handleRouteParams() {
-    if (this.props.params && this.props.params.wordId) {
-      this.fetchWord(this.props.params.wordId);
     }
   }
 
@@ -43,7 +39,7 @@ class WordContainer extends Component {
       return <div>this.state.wordData.error;</div>;
     }
     else {
-      return<Word wordData={this.state.wordData} loading={this.state.loading}/>;
+      return <Word wordName={this.props.wordId} wordData={this.state.wordData} loading={this.state.loading}/>;
     }
   }
 }

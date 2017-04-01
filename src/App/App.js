@@ -6,7 +6,7 @@ import NavBar from './NavBar';
 import Home from './../rotues/home/Home';
 import CardsContainer from './../rotues/cards/CardsContainer';
 import MyWordsContainer from './../rotues/MyWordsContainer';
-import WordContainer from './../common/WordContainer'
+import WordRoute from './../rotues/WordRoute'
 
 
 const AppContainer = styled.div`
@@ -30,7 +30,7 @@ const NoMatch = ({ location }) => (
 );
 
 class App extends Component {
-  render() {
+  render() { // TODO: pass a prop to WordContainer Instead using WordRoute
     return (
       <AppContainer>
         <NavBar/>
@@ -38,7 +38,7 @@ class App extends Component {
           <Match exactly pattern="/" component={Home} />
           <Match pattern="/cards" component={CardsContainer} />
           <Match pattern="/myWords" component={MyWordsContainer} />
-          <Match pattern="/word/:wordId" component={WordContainer}/>
+          <Match pattern="/word/:wordId" component={WordRoute}/>
           <Miss component={NoMatch}/>
         </Scroller>
       </AppContainer>

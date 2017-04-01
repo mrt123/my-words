@@ -16,6 +16,12 @@ class FavContainer extends Component {
     api.fetchFavoriteByWordId(this.props.wordId).then(this.reactToData);
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (this.props.wordId !== nextProps.wordId) {
+      this.setState({loading: true});
+      api.fetchFavoriteByWordId(nextProps.wordId).then(this.reactToData);}
+  }
+
   setFavorite(e) {
     e.stopPropagation();
     this.setState({loading: true});

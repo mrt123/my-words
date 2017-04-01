@@ -19,7 +19,7 @@ export default class Home extends Component {
     var searchResult ='';
 
     if(this.state.searchValue) {
-      searchResult = <WordContainer wordId={this.state.searchValue}></WordContainer>;
+      searchResult = <WordContainer wordId={this.state.searchValue}/>;
     }
 
     return (

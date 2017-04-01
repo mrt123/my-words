@@ -5,8 +5,7 @@ import StarEmptySvg from './../img/StarEmpty'
 import LoadingSpinner from './../common/LoadingSpinner.js'
 
 const starSize = 22;
-
-const FavoriteContainer = styled.div`
+const FavoriteWrapper = styled.div`
   display: inline-block;
   height: ${props => props.size}px;
   margin-left: 15px;
@@ -29,7 +28,7 @@ export default ({ loading, favoriteData, favoriteAction }) => {
   if (loading) {
     icon = <LoadingSpinner size={starSize}/>
   }
-  else if (favoriteData.isFavorite){
+  else if (favoriteData.isFavorite) {
     title = 'un-favorite';
     icon = <StarFilledIcon/>
   }
@@ -38,5 +37,5 @@ export default ({ loading, favoriteData, favoriteAction }) => {
     icon = <StarEmptyIcon/>
   }
 
-  return <FavoriteContainer title={title} size={starSize} onClick={favoriteAction}>{icon}</FavoriteContainer>
+  return <FavoriteWrapper title={title} size={starSize} onClick={favoriteAction}>{icon}</FavoriteWrapper>
 }

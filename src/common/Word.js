@@ -16,22 +16,26 @@ const WordLabel = styled.h2`
   margin: 10px 0;
 `;
 
-export default function Word({ wordData, loading }) {
+export default function Word({ wordName, wordData, loading }) {
   var word = wordData.word;
   var wordId = word.wordId;
+  var wordDescription;
 
-  if(loading) {
-    return <BigSpinner/>;
+  if (loading) {
+    wordDescription = <BigSpinner/>;
   }
   else if (wordId) {
-    return (
-      <WordWrapper>
-        <WordLabel>
-          {wordId}
-          <FavoriteContainer wordId={wordId}/>
-        </WordLabel>
-        <LexicalEntries entries={word.lexicalEntries}/>
-      </WordWrapper>
-    )
+    wordDescription = <LexicalEntries entries={word.lexicalEntries}/>
   }
+
+  return (
+    <WordWrapper>
+      <WordLabel>
+        {wordName}
+        <FavoriteContainer wordId={wordName}/>
+      </WordLabel>
+      {wordDescription}
+    </WordWrapper>
+  )
+
 }
