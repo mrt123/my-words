@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import * as api from './../api/api';
 import MyWords from './MyWords';
-import LoadingSpinner from './../common/LoadingSpinner'
+import {BigSpinner} from './routeComponents';
 
 class MyWordsContainer extends Component {
   constructor() {
@@ -21,7 +21,7 @@ class MyWordsContainer extends Component {
   }
 
   render() {
-    return this.state.loading ? <LoadingSpinner/> : <MyWords data={this.state.words}/>;
+    return this.state.loading ? <BigSpinner/> : <MyWords data={this.state.words}/>;
   }
 }
 

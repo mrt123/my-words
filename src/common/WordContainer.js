@@ -1,21 +1,12 @@
 import React, { Component } from 'react';
 import * as api from './../api/api';
-import LoadingSpinner from './LoadingSpinner';
 import Word from './Word';
-
-import styled from 'styled-components';
-
-const Result = styled.div`
-  margin: 30px 10px;
-  display: flex;
-  flex-grow: 1;
-`;
 
 class WordContainer extends Component {
 
   constructor() {
     super();
-    this.state = {wordData: {word: {}, error: ''}};
+    this.state = {wordData: {word: {}, error: ''}, loading: true};
   }
 
   componentDidMount() {
@@ -25,8 +16,8 @@ class WordContainer extends Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {  console.log('old: ' + this.props.wordId, 'new: ' + nextProps.wordId)
-    if(this.props.wordId !== nextProps.wordId) {        console.log('WordContainer: props recieived ')
+  componentWillReceiveProps(nextProps) {
+    if(this.props.wordId !== nextProps.wordId) {
       this.fetchWord(nextProps.wordId);
     }
   }
@@ -46,29 +37,14 @@ class WordContainer extends Component {
   }
 
   render() {
-
-    // TODO : remove all rendering relating to loading and move to <Word>.
     // TODO: remove all error handling (backend should provide consistent error format;
 
-    var activeComponent;
-    if (this.state.loading) {
-      activeComponent = <LoadingSpinner size="{80}"/>;
+    if (this.state.wordData.error) {
+      return <div>this.state.wordData.error;</div>;
     }
     else {
-      activeComponent = <Word wordData={this.state.wordData}/>;
+      return<Word wordData={this.state.wordData} loading={this.state.loading}/>;
     }
-
-    var error = '';
-    if (this.state.wordData.error) {
-      error = this.state.wordData.error;
-    }
-
-    return (
-      <Result>
-        {error}
-        {activeComponent}
-      </Result>
-    );
   }
 }
 

@@ -1,18 +1,19 @@
 import React from 'react';
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 import StarFilledSvg from './../img/StarFilled'
 import StarEmptySvg from './../img/StarEmpty'
+import LoadingSpinner from './../common/LoadingSpinner.js'
+
+const starSize = 22;
 
 const FavoriteContainer = styled.div`
-  display: flex;
-  height: 20px;
+  display: inline-block;
+  height: ${props => props.size}px;
   margin-left: 15px;
   &:hover {
     cursor: pointer;
   }
 `;
-
-const starSize = 22;
 
 const StarFilledIcon = () => (
   <StarFilledSvg width={starSize} height={starSize} color='orange'/>
@@ -22,24 +23,20 @@ const StarEmptyIcon = () => (
   <StarEmptySvg width={starSize} height={starSize} color='grey'/>
 );
 
-const rotate360 = keyframes`
-  from { transform: rotateY(0deg); }
-  to { transform: rotateY(360deg); }
-`;
-
-const Spinner = styled.div`
-  display: flex;
-  animation: ${rotate360} 0.5s linear infinite;
-`;
-
 export default ({ loading, favoriteData, favoriteAction }) => {
-  var icon;
+  var icon, title;
+
   if (loading) {
-    icon = <Spinner>x</Spinner>
+    icon = <LoadingSpinner size={starSize}/>
   }
-  else {
-    icon = favoriteData.isFavorite ? <StarFilledIcon/> : <StarEmptyIcon/>
+  else if (favoriteData.isFavorite){
+    title = 'un-favorite';
+    icon = <StarFilledIcon/>
+  }
+  else if (!favoriteData.isFavorite) {
+    title = 'make favorite';
+    icon = <StarEmptyIcon/>
   }
 
-  return <FavoriteContainer onClick={favoriteAction}>{icon}</FavoriteContainer>
+  return <FavoriteContainer title={title} size={starSize} onClick={favoriteAction}>{icon}</FavoriteContainer>
 }

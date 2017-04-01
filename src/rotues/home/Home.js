@@ -1,11 +1,7 @@
 import React, {Component} from 'react';
-import styled from 'styled-components';
+import {RouteWrapper} from '../routeComponents';
 import Search from './Search';
 import WordContainer from './../../common/WordContainer';
-
-const Wrap = styled.div`
-  flex-grow: 1;
-`;
 
 export default class Home extends Component {
 
@@ -20,11 +16,17 @@ export default class Home extends Component {
   }
 
   render () {
+    var searchResult ='';
+
+    if(this.state.searchValue) {
+      searchResult = <WordContainer wordId={this.state.searchValue}></WordContainer>;
+    }
+
     return (
-      <Wrap>
+      <RouteWrapper>
         <Search searchAction={this.search}></Search>
-        <WordContainer wordId={this.state.searchValue}></WordContainer>
-      </Wrap>
+        {searchResult}
+      </RouteWrapper>
     );
   }
 }

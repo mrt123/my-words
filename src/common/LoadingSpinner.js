@@ -1,6 +1,6 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
-import reactLogo from './../img/reactLogo.svg';
+import CogSvg from './../img/CogSvg.js';
 
 const rotate360 = keyframes`
   from { transform: rotate(0deg); }
@@ -11,15 +11,16 @@ const SpinnerWrapper = styled.div`
   display: flex;
   flex-grow: 1;
   justify-content: center;
-  margin: 10px;
+  align-items: center;
 `;
 
-const Spinner = styled.img`
-  animation: ${rotate360} 2s linear infinite;
+const Spinner = styled.div`
+  display: flex;
+  animation: ${rotate360} 1s linear infinite;
 `;
 
 export default ({size}) => (
   <SpinnerWrapper>
-    <Spinner src={reactLogo} size={size}></Spinner>
+    <Spinner><CogSvg width={size} height={size} color="#B4D1B6"/></Spinner>
   </SpinnerWrapper>
 );
