@@ -4,12 +4,13 @@ import styled from 'styled-components';
 const Wrapper = styled.div`
   display: flex;
   justify-content: center;
+  flex-shrink: 0;
   margin-top: 30px;
 `;
 
 const Input = styled.input`
-  font-size: 1.25em;
-  padding: 0.5em;
+  font-size: 20px;
+  padding: 10px;
   color: palevioletred;
   background: papayawhip;
   border: none;
