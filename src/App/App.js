@@ -6,8 +6,7 @@ import NavBar from './NavBar';
 import Home from './../rotues/home/Home';
 import CardsContainer from './../rotues/cards/CardsContainer';
 import MyWordsContainer from './../rotues/MyWordsContainer';
-import WordRoute from './../rotues/WordRoute'
-
+import WordContainer from '../common/WordContainer.js';
 
 const AppContainer = styled.div`
   display: flex;
@@ -38,7 +37,7 @@ class App extends Component {
           <Match exactly pattern="/" component={Home} />
           <Match pattern="/cards" component={CardsContainer} />
           <Match pattern="/myWords" component={MyWordsContainer} />
-          <Match pattern="/word/:wordId" component={WordRoute}/>
+          <Match pattern="/word/:wordId" render={(props) => <WordContainer wordId={props.params.wordId}/>}/>
           <Miss component={NoMatch}/>
         </Scroller>
       </AppContainer>
