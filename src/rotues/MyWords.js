@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Link } from 'react-router'
+import { Link } from 'react-router-dom'
 
 const Wrapper = styled.div`
   display: flex;
@@ -9,7 +9,7 @@ const Wrapper = styled.div`
   margin: 10px;
 `;
 
-const WordAnchor = styled.a`
+const WordAnchor = styled(Link)`
   display: inline-block;
   font-size: 13px;
   text-decoration: none;
@@ -17,21 +17,11 @@ const WordAnchor = styled.a`
   color: black;
 `;
 
-const WordLink = ({ children, ...rest }) => (
-  <Link {...rest}>
-    {params =>
-      <WordAnchor {...params}>
-        {children}
-      </WordAnchor>
-    }
-  </Link>
-);
-
 export default ({ data }) => {
 
   if(data.length > 0) {
     var words = data.map((word, i)=>(
-      <WordLink key={i} to={`/word/${word}`}>{word}</WordLink>
+      <WordAnchor key={i} to={`/word/${word}`}>{word}</WordAnchor>
     ));
     return (
       <Wrapper>

@@ -1,5 +1,9 @@
-import React, { Component } from 'react';
-import { Match, Miss } from 'react-router'
+import React from 'react';
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch
+} from 'react-router-dom'
 import styled from 'styled-components';
 import NavBar from './NavBar';
 
@@ -24,25 +28,26 @@ const Scroller = styled.div`
 const NoMatch = ({ location }) => (
   <div>
     <h2>Whoops</h2>
+
     <p>Sorry but {location.pathname} didn’t match any pages</p>
   </div>
 );
 
-class App extends Component {
-  render() { // TODO: pass a prop to WordContainer Instead using WordRoute
-    return (
-      <AppContainer>
-        <NavBar/>
-        <Scroller>
-          <Match exactly pattern="/" component={Home} />
-          <Match pattern="/cards" component={CardsContainer} />
-          <Match pattern="/myWords" component={MyWordsContainer} />
-          <Match pattern="/word/:wordId" render={(props) => <WordContainer wordId={props.params.wordId}/>}/>
-          <Miss component={NoMatch}/>
-        </Scroller>
-      </AppContainer>
-    );
-  }
-}
 
-export default App;
+  export default () => (
+      <Router>
+        <AppContainer>
+          <NavBar/>
+          <Scroller>
+            <Switch>
+              <Route exact path="/" component={Home}/>
+              <Route path="/myWords" component={MyWordsContainer}/>
+              <Route path="/cards" component={CardsContainer}/>
+              <Route path="/word/:wordId" render={({match}) => <WordContainer wordId={match.params.wordId}/>}/>
+              <Route component={NoMatch}/>
+            </Switch>
+          </Scroller>
+        </AppContainer>
+      </Router>
+    );
+

@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router'
+import { Link } from 'react-router-dom'
 import MagnifyGlassSvg from './../img/MagnifyGlass'
 import BookSvg from './../img/Book'
 import GraduationCapSvg from './../img/GraduationCap'
@@ -20,23 +20,13 @@ const Menu = styled.div`
   align-items: center;
 `;
 
-const NavAnchor = styled.a`
+const NavAnchor = styled(Link)`
   display: inline-block;
   font-size: 13px;
   text-decoration: none;
   padding: 0 16px;
   color: #D0D6D9;
 `;
-
-const NavLink = ({ children, ...rest }) => (
-  <Link {...rest}>
-    {params =>
-      <NavAnchor {...params}>
-        {children}
-      </NavAnchor>
-    }
-  </Link>
-);
 
 const MagnifyGlassIcon = () => (
   <MagnifyGlassSvg width='25' height='25' color='white'/>
@@ -53,14 +43,14 @@ const GraduationCapIcon = () => (
 export default () => (
   <NavBarWrapper>
     <Menu>
-      <NavLink to="/"><MagnifyGlassIcon/></NavLink>
-      <NavLink to="/myWords"><BookIcon/></NavLink>
-      <NavLink to="/cards"><GraduationCapIcon/></NavLink>
+      <NavAnchor to="/"><MagnifyGlassIcon/></NavAnchor>
+      <NavAnchor to="/myWords"><BookIcon/></NavAnchor>
+      <NavAnchor to="/cards"><GraduationCapIcon/></NavAnchor>
     </Menu>
 
     <Menu>
-      <NavLink to="/xxx">Link</NavLink>
-      <NavLink to="/xxx">Link</NavLink>
+      <NavAnchor to="/xxx">Link</NavAnchor>
+      <NavAnchor to="/xxx">Link</NavAnchor>
     </Menu>
   </NavBarWrapper>
 )
