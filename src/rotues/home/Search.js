@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import createHistory from 'history/createBrowserHistory'
+const history = createHistory();
 
 const Wrapper = styled.div`
   display: flex;
@@ -35,18 +37,26 @@ const PLACEHOLDER_TEXT = 'enter a word';
 class Search extends Component {
   constructor(props) {
     super(props);
-    this.state = {value: ''};
+    this.state = {value: props.searchValue || ''};
 
     this.handleKeyPress = this.handleKeyPress.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSearch = this.handleSearch.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.performSearch = this.performSearch.bind(this);
   }
 
-  handleChange(event) {
+  componentWillReceiveProps(nextProps) {
+    this.setState({value: nextProps.searchValue});
+  }
+
+  handleInputChange(event) {
     this.setState({value: event.target.value});
   }
 
-  handleSearch(e) {
+  performSearch(e) {
+
+    const path = '/search/' + this.state.value;
+    history.push(path);
+
     if (this.state.value !== '') {
       this.props.searchAction(this.state.value);
     }
@@ -55,7 +65,7 @@ class Search extends Component {
 
   handleKeyPress(e) {
     if (e.key === 'Enter') {
-      this.handleSearch(e);
+      this.performSearch(e);
     }
   }
 
@@ -63,10 +73,10 @@ class Search extends Component {
     return (
       <Wrapper>
         <Input type="text" value={this.state.value}
-               onChange={this.handleChange}
+               onChange={this.handleInputChange}
                onKeyPress={this.handleKeyPress}
                placeholder={PLACEHOLDER_TEXT}/>
-        <Button onClick={this.handleSearch}>Search</Button>
+        <Button onClick={this.performSearch}>Search</Button>
       </Wrapper>
     );
   }

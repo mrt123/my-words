@@ -38,7 +38,7 @@ class WordContainer extends Component {
     if (this.state.wordData.error) {
       return <div>this.state.wordData.error;</div>;
     }
-    else {
+    else if(this.props.wordId) {
       return <Word wordName={this.props.wordId} wordData={this.state.wordData} loading={this.state.loading}/>;
     }
   }

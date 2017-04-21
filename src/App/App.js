@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   BrowserRouter as Router,
+  Redirect,
   Route,
   Switch
 } from 'react-router-dom'
@@ -40,7 +41,9 @@ const NoMatch = ({ location }) => (
           <NavBar/>
           <Scroller>
             <Switch>
-              <Route exact path="/" component={Home}/>
+              <Redirect exact from="/" to="/search" />
+              <Route exact path="/search" component={Home}/>
+              <Route path="/search/:wordId" render={({match}) => <Home wordId={match.params.wordId}/>}/>
               <Route path="/myWords" component={MyWordsContainer}/>
               <Route path="/cards" component={CardsContainer}/>
               <Route path="/word/:wordId" render={({match}) => <WordContainer wordId={match.params.wordId}/>}/>

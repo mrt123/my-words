@@ -7,24 +7,28 @@ export default class Home extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {searchValue: ''};
-    this.search = this.search.bind(this);
+    this.state = {searchValue: props.wordId || ''};
+    this.performSearch = this.performSearch.bind(this);
   }
 
-  search(v) {
+  componentWillReceiveProps(nextProps) {
+    this.setState({searchValue: nextProps.wordId});
+  }
+
+  performSearch(v) {
     this.setState({searchValue: v});
   }
 
-  render () {
-    var searchResult ='';
+  render() {
+    var searchResult = '';
 
-    if(this.state.searchValue) {
+    if (this.state.searchValue) {
       searchResult = <WordContainer wordId={this.state.searchValue}/>;
     }
 
     return (
       <RouteWrapper>
-        <Search searchAction={this.search}></Search>
+        <Search searchValue={this.state.searchValue} searchAction={this.performSearch}></Search>
         {searchResult}
       </RouteWrapper>
     );
