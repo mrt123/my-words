@@ -12,7 +12,7 @@ export default class Home extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState({searchValue: nextProps.wordId});
+    this.setState({searchValue: nextProps.wordId || ''});
   }
 
   performSearch(v) {
