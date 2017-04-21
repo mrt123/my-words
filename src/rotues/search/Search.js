@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {RouteWrapper} from '../routeComponents';
-import Search from './Search';
+import SearchBar from './SearchBar';
 import WordContainer from './../../common/WordContainer';
 
 export default class Home extends Component {
@@ -28,7 +28,7 @@ export default class Home extends Component {
 
     return (
       <RouteWrapper>
-        <Search searchValue={this.state.searchValue} searchAction={this.performSearch}></Search>
+        <SearchBar searchValue={this.state.searchValue} searchAction={this.performSearch} />
         {searchResult}
       </RouteWrapper>
     );
