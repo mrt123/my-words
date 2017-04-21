@@ -8,7 +8,7 @@ import {
 import styled from 'styled-components';
 import NavBar from './NavBar';
 
-import Home from './../rotues/home/Home';
+import Search from './../rotues/search/Search';
 import CardsContainer from './../rotues/cards/CardsContainer';
 import MyWordsContainer from './../rotues/MyWordsContainer';
 import WordContainer from '../common/WordContainer.js';
@@ -42,8 +42,8 @@ const NoMatch = ({ location }) => (
           <Scroller>
             <Switch>
               <Redirect exact from="/" to="/search" />
-              <Route exact path="/search" component={Home}/>
-              <Route path="/search/:wordId" render={({match}) => <Home wordId={match.params.wordId}/>}/>
+              <Route exact path="/search" component={Search}/>
+              <Route path="/search/:wordId" render={({match}) => <Search wordId={match.params.wordId}/>}/>
               <Route path="/myWords" component={MyWordsContainer}/>
               <Route path="/cards" component={CardsContainer}/>
               <Route path="/word/:wordId" render={({match}) => <WordContainer wordId={match.params.wordId}/>}/>
