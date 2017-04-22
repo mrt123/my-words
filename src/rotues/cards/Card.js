@@ -19,7 +19,7 @@ const Flipper = styled.div`
 `;
 
 const Card = styled.div`
-  overflow-y: scroll;
+  overflow-y: auto;
   cursor: pointer;
   display: flex;
   position: absolute;
