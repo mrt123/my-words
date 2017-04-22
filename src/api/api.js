@@ -7,7 +7,10 @@ export function fetchDefinition(word) {
 
       if (respPromise.status === 404) {
         return {
-          status: 'NOT_FOUND'
+          meta: {
+            isError: true,
+            errorMsg: 'No connection to the server!'
+          }
         }
       }
       else {

@@ -21,8 +21,8 @@ export default function Word({ wordName, response, loading }) {
   if(loading) {
     return getWordDom(wordName, <BigSpinner/>);
   }
-  else if (response.meta.isEmptyData) {
-    return getWordDom(wordName, response.meta.emptyDataMessage);
+  else if (response.meta.isError) {
+    return getWordDom(wordName, response.meta.errorMsg);
   }
   else {
     return getWordDom(wordName, <LexicalEntries entries={response.data.lexicalEntries}/>);

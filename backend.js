@@ -14,10 +14,14 @@ app.use('/', function (req, res, next) {
 
 app.get('/api/words/:id', function (req, res) {
 
-  dbQuery('select * from entries where wordId="' + req.params.id + '"').then(function (rows) {
-    var parsedWord = parseWord(rows);
-    res.send(responseObj.wrapParsedData(rows, parsedWord));
-  });
+  dbQuery('select * from entries where wordId="' + req.params.id + '"')
+    .then((rows) => {
+      var parsedWord = parseWord(rows);
+      res.send(responseObj.wrapParsedData(rows, parsedWord));
+    })
+    .catch((error)=> {
+      res.status(500).send(responseObj.wrapError('Error: ' + error.code));
+    });
 });
 
 app.get('/api/favorite/words', function (req, res) {

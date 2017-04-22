@@ -2,8 +2,18 @@ exports.wrapParsedData = function(rows, parsedData) {
   return {
     data: parsedData,
     meta: {
-      isEmptyData: rows.length === 0,
-      emptyDataMessage: 'No data found!'
+      isError: rows.length === 0,
+      errorMsg: 'No data found!'
+    }
+  }
+};
+
+exports.wrapError = function(errorMsg) {
+  return {
+    data: {},
+    meta: {
+      isError: true,
+      errorMsg: errorMsg
     }
   }
 };
