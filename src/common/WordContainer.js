@@ -7,7 +7,6 @@ class WordContainer extends Component {
   constructor() {
     super();
     this.state = {
-      wordData: {word: {}, error: ''},
       loading: true
     };
   }
@@ -33,14 +32,7 @@ class WordContainer extends Component {
   }
 
   render() {
-    // TODO: remove all error handling (backend should provide consistent error format;
-
-    if (this.state.wordData.error) {
-      return <div>this.state.wordData.error;</div>;
-    }
-    else if(this.props.wordId) {
-      return <Word wordName={this.props.wordId} wordData={this.state.wordData} loading={this.state.loading}/>;
-    }
+    return <Word wordName={this.props.wordId} response={this.state.wordData} loading={this.state.loading}/>;
   }
 }
 

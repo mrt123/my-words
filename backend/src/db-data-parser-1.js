@@ -1,20 +1,21 @@
 exports.parseWord = parseWordFromDatabaseRows;
 
 function parseWordFromDatabaseRows(rows) {
-  return {
-
-    word :{
+  if (rows.length > 0) {
+    return {
       wordId: rows[0].wordId,
       metadata: 'from https://sourceforge.net/projects/mysqlenglishdictionary/files/englishdictionary.sql/download',
       lexicalEntries: parseLexicalEntriesFromRows(rows)
-    },
-    error: ''
+    }
+  }
+  else {
+    return {};
   }
 }
 
 function parseLexicalEntriesFromRows(rows) {
 
-  var rowsWithRemappedWordTypes = rows.map((r)=>{
+  var rowsWithRemappedWordTypes = rows.map((r)=> {
     return {
       wordtype: getWordTypeFromAbbreviation(r.wordtype),
       definition: r.definition

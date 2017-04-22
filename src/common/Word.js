@@ -16,18 +16,20 @@ const WordLabel = styled.h2`
   margin: 10px 0;
 `;
 
-export default function Word({ wordName, wordData, loading }) {
-  var word = wordData.word;
-  var wordId = word.wordId;
-  var wordDescription;
+export default function Word({ wordName, response, loading }) {
 
-  if (loading) {
-    wordDescription = <BigSpinner/>;
+  if(loading) {
+    return getWordDom(wordName, <BigSpinner/>);
   }
-  else if (wordId) {
-    wordDescription = <LexicalEntries entries={word.lexicalEntries}/>
+  else if (response.meta.isEmptyData) {
+    return getWordDom(wordName, response.meta.emptyDataMessage);
   }
+  else {
+    return getWordDom(wordName, <LexicalEntries entries={response.data.lexicalEntries}/>);
+  }
+}
 
+function getWordDom(wordName, wordDescription) {
   return (
     <WordWrapper>
       <WordLabel>
@@ -37,5 +39,4 @@ export default function Word({ wordName, wordData, loading }) {
       {wordDescription}
     </WordWrapper>
   )
-
 }
