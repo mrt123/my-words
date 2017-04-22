@@ -1,43 +1,11 @@
 import 'whatwg-fetch';
 
-// must handle 500 & 404 in case if backend fails to handle it!
 export function fetchDefinition(word) {
-  return fetch('/api/words/' + word)
-    .then(function (respPromise) {
-
-      if (respPromise.status === 404) {
-        return {
-          meta: {
-            isError: true,
-            errorMsg: 'No connection to the server!'
-          }
-        }
-      }
-      else {
-        return respPromise.json()
-      }
-    })
-    .catch(function (ex) {
-      console.log('parsing failed', ex)
-    })
+  return getResponseFromFetch(fetch('/api/words/' + word));
 }
 
 export function fetchFavoriteByWordId(wordId) {
-  return fetch('/api/favorite/words/' + wordId)
-    .then(function (respPromise) {
-
-      if (respPromise.status === 404) {
-        return {
-          status: 'NOT_FOUND'
-        }
-      }
-      else {
-        return respPromise.json(); // TODO: include error report in same format on backend!
-      }
-    })
-    .catch(function (ex) {
-      console.log('parsing failed', ex)
-    })
+  return getResponseFromFetch(fetch('/api/favorite/words/' + wordId));
 }
 
 export function toggleFavoriteByWordId(newFavValue, wordId) {
@@ -57,19 +25,29 @@ export function toggleFavoriteByWordId(newFavValue, wordId) {
 }
 
 export function fetchMyWordsIds() {
-  return fetch('/api/favorite/words/')
-    .then(function (respPromise) {
+  return getResponseFromFetch(fetch('/api/favorite/words/'));
+}
 
-      if (respPromise.status === 404) {
-        return {
-          status: 'NOT_FOUND'
-        }
-      }
-      else {
-        return respPromise.json();
-      }
+function getResponseFromFetch(fetchResult) {
+  return fetchResult
+    .then(function (respPromise) {
+      return parseServerResponse(respPromise);
     })
     .catch(function (ex) {
       console.log('parsing failed', ex)
-    })
+    });
+}
+
+function parseServerResponse(response) {
+  if (response.status === 404) {
+    return {
+      meta: {
+        isError: true,
+        errorMsg: 'No connection to the server!'
+      }
+    }
+  }
+  else {
+    return response.json()
+  }
 }
