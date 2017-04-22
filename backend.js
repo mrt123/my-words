@@ -2,6 +2,7 @@ var express = require('express');
 var bodyParser = require("body-parser");
 var app = express();
 var parseWord = require('./backend/src/db-data-parser-1').parseWord;
+var responseObj = require('./backend/src/responseObject');
 var dbQuery = require('./backend/src/db-connection').query;
 
 app.use(bodyParser.json());
@@ -14,12 +15,8 @@ app.use('/', function (req, res, next) {
 app.get('/api/words/:id', function (req, res) {
 
   dbQuery('select * from entries where wordId="' + req.params.id + '"').then(function (rows) {
-    if (rows.length > 0) {
-      res.send(parseWord(rows));
-    }
-    else {
-      res.status(404).send('Word Not found');
-    }
+    var parsedWord = parseWord(rows);
+    res.send(responseObj.wrapParsedData(rows, parsedWord));
   });
 });
 
