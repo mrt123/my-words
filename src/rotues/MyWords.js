@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
+import {BigSpinner} from './routeComponents';
 
 const Wrapper = styled.div`
   display: flex;
@@ -17,9 +18,12 @@ const WordAnchor = styled(Link)`
   color: black;
 `;
 
-export default ({ data }) => {
+export default ({ data, loading }) => {
 
-  if(data.length > 0) {
+  if (loading) {
+    return  <BigSpinner/>;
+  }
+  else if (data.length > 0) {
     var words = data.map((word, i)=>(
       <WordAnchor key={i} to={`/word/${word}`}>{word}</WordAnchor>
     ));
