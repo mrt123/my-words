@@ -30,24 +30,25 @@ export function fetchMyWordsIds() {
 
 function getResponseFromFetch(fetchResult) {
   return fetchResult
-    .then(function (respPromise) {
-      return parseServerResponse(respPromise);
-    })
-    .catch(function (ex) {
-      console.log('parsing failed', ex)
+    .then(parseServerResponse)
+    .catch((parsingError) => {
+      return getErrorForMessage(parsingError.message);
     });
 }
 
 function parseServerResponse(response) {
-  if (response.status === 404) {
-    return {
-      meta: {
-        isError: true,
-        errorMsg: 'No connection to the server!'
-      }
-    }
+  if (response.status >= 200 && response.status < 300) {
+    return response.json();
+  } else {
+    return getErrorForMessage(response.status);
   }
-  else {
-    return response.json()
+}
+
+function getErrorForMessage(message) {
+  return {
+    meta: {
+      isError: true,
+      errorMsg: 'Error: ' + message
+    }
   }
 }
