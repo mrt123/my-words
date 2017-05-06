@@ -1,9 +1,10 @@
 var express = require('express');
 var bodyParser = require("body-parser");
 var app = express();
-var parseWord = require('./backend/src/db-data-parser-1').parseWord;
-var responseObj = require('./backend/src/responseObject');
-var dbQuery = require('./backend/src/db-connection').query;
+var parseWord = require('./src/db-data-parser-1').parseWord;
+var responseObj = require('./src/responseObject');
+var dbQuery = require('./src/db-connection').query;
+var config = require('./src/config').get();
 
 app.use(bodyParser.json());
 
@@ -68,6 +69,6 @@ app.get('/api/favorite/words/:id', function (req, res) {
 });
 
 var httpServer = require('http').createServer(app);
-httpServer.listen(1337, function () {
-  console.log('server running on port 1337.');
+httpServer.listen(config.api.port, function () {
+  console.log('api server running: ' + JSON.stringify(config, null, 2));
 });
