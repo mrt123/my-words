@@ -1,11 +1,13 @@
 var express = require('express');
 var bodyParser = require("body-parser");
 var app = express();
-var parseWord = require('./src/db-data-parser-1').parseWord;
-var responseObj = require('./src/responseObject');
-var dbQuery = require('./src/db-connection').query;
-var config = require('./src/config').get();
+var cors = require('cors')
+var parseWord = require('./db-data-parser-1').parseWord;
+var responseObj = require('./responseObject');
+var dbQuery = require('./db-connection').query;
+var config = require('./config').get();
 
+app.use(cors());
 app.use(bodyParser.json());
 
 app.use('/', function (req, res, next) {

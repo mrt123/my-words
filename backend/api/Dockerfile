@@ -10,5 +10,5 @@ FROM node:slim
  RUN yarn install && yarn cache clean
  COPY . /usr/src/app
 
- CMD [ "node", "src/server.js --host words-db-box" ]
+ CMD [ "node", "src/server.js", "--db-host", "words-db-box" ]
 
