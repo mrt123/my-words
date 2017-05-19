@@ -3,19 +3,21 @@ var config = require('./config').get();
 
 exports.query = query;
 
+let pool = createConnectionPool();
 
 function query(queryString) {
-  return createConnection().then(function (conn) {
+  return pool.query(queryString).then(function (rows) {
     console.log('----> ', queryString);
-    return conn.query(queryString).delay(750);
+    return rows;
   });
 }
 
-function createConnection() {
-  return mysql.createConnection({
+function createConnectionPool() {
+  return mysql.createPool({
     host: config.db.host,
     user: config.db.user,
     password: config.db.password,
-    database: config.db.name
+    database: config.db.name,
+    connectionLimit: 10
   });
 }
