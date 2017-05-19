@@ -1,15 +1,16 @@
 import 'whatwg-fetch';
+const API_HOST = getApiHost();
 
 export function fetchDefinition(word) {
-  return getResponseFromFetch(fetch('/api/words/' + word));
+  return getResponseFromFetch(fetch(API_HOST + '/api/words/' + word));
 }
 
 export function fetchFavoriteByWordId(wordId) {
-  return getResponseFromFetch(fetch('/api/favorite/words/' + wordId));
+  return getResponseFromFetch(fetch(API_HOST + '/api/favorite/words/' + wordId));
 }
 
 export function toggleFavoriteByWordId(newFavValue, wordId) {
-  return fetch("/api/favorite/words/",
+  return fetch(API_HOST + "/api/favorite/words/",
     {
       method: "POST",
       headers: {
@@ -25,7 +26,7 @@ export function toggleFavoriteByWordId(newFavValue, wordId) {
 }
 
 export function fetchMyWordsIds() {
-  return getResponseFromFetch(fetch('/api/favorite/words/'));
+  return getResponseFromFetch(fetch(API_HOST + '/api/favorite/words/'));
 }
 
 function getResponseFromFetch(fetchResult) {
@@ -50,5 +51,14 @@ function getErrorForMessage(message) {
       isError: true,
       errorMsg: 'Error: ' + message
     }
+  }
+}
+
+function getApiHost() {
+  if(process.env.NODE_ENV === 'production') {
+    return process.env.REACT_APP_API_HOST;
+  }
+  else {
+    return 'http://localhost:1337';
   }
 }
