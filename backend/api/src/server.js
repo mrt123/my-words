@@ -6,6 +6,7 @@ var parseWord = require('./db-data-parser-1').parseWord;
 var responseObj = require('./responseObject');
 var dbQuery = require('./db-connection').query;
 var config = require('./config').get();
+require('./auth').configure(app);
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -20,7 +21,7 @@ app.get('/api/words/:id', function (req, res) {
   dbQuery('select * from entries where wordId="' + req.params.id + '"')
     .then((rows) => {
       var parsedWord = parseWord(rows);
-      res.send(responseObj.wrapParsedData(rows, parsedWord));
+      res.send(responseObj.wrapParsedWordData(rows, parsedWord));
     })
     .catch((error)=> {
       res.status(500).send(responseObj.wrapError('Error: ' + error.code));
@@ -69,6 +70,18 @@ app.get('/api/favorite/words/:id', function (req, res) {
     });
   });
 });
+
+app.get('/api/users/me',
+  function (req, res) {
+
+    if(req.user) {
+      res.json(req.user);
+    }
+    else {
+      res.status(401).send(responseObj.wrapError('Error: You are not logged in'));
+    }
+  }
+);
 
 var httpServer = require('http').createServer(app);
 httpServer.listen(config.api.port, function () {

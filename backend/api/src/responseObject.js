@@ -1,4 +1,4 @@
-exports.wrapParsedData = function(rows, parsedData) {
+exports.wrapParsedWordData = function(rows, parsedData) {
   return {
     data: parsedData,
     meta: {
