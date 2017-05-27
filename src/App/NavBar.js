@@ -40,17 +40,19 @@ const GraduationCapIcon = () => (
   <GraduationCapSvg width='25' height='25' color='white'/>
 );
 
-export default () => (
-  <NavBarWrapper>
-    <Menu>
-      <NavAnchor to="/"><MagnifyGlassIcon/></NavAnchor>
-      <NavAnchor to="/myWords"><BookIcon/></NavAnchor>
-      <NavAnchor to="/cards"><GraduationCapIcon/></NavAnchor>
-    </Menu>
+export default () => {
+  return (
+    <NavBarWrapper>
+      <Menu>
+        <NavAnchor to="/"><MagnifyGlassIcon/></NavAnchor>
+        <NavAnchor to="/myWords"><BookIcon/></NavAnchor>
+        <NavAnchor to="/cards"><GraduationCapIcon/></NavAnchor>
+      </Menu>
 
-    <Menu>
-      <NavAnchor to="/xxx">Link</NavAnchor>
-      <NavAnchor to="/xxx">Link</NavAnchor>
-    </Menu>
-  </NavBarWrapper>
-)
+      <Menu>
+        <NavAnchor to="/xxx">Link</NavAnchor>
+        <NavAnchor to="/login">Login</NavAnchor>
+      </Menu>
+    </NavBarWrapper>
+  );
+}
