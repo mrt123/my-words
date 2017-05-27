@@ -7,3 +7,5 @@ body {
 div, span {
   box-sizing: border-box;
 }
+
+@import "../node_modules/normalize.css/normalize.css";
