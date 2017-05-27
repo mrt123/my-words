@@ -1,8 +1,8 @@
-var expressSession = require('express-session');
+let expressSession = require('express-session');
 let config = require('./config').get();
 let passport = require('passport');
 let FacebookStrategy = require('passport-facebook').Strategy;
-//let jwt = require('jsonwebtoken');
+let jwt = require('jsonwebtoken');
 
 exports.configure = configure;
 
@@ -49,21 +49,26 @@ function configureRoutes(app) {
 
   /**
    * TODO:
-   * - switch off passport session and store our own token in the client (preferably with "jsonwebtoken"):
-   * -- avoids user drop of during backend restart:
-   * --- since passports only stores session reference in cookie and user data in memory
+   * - implement token expiration
    */
-  app.get('/auth/facebook/callback',
-    function (req, res, next) {
 
-      let appUrl = config.app.protocol + config.app.host + ':' + config.app.port;
+  app.get('/auth/facebook/callback', function (req, res, next) {
 
-      return passport.authenticate('facebook',
-        {
-          successRedirect: appUrl,
-          failureRedirect: appUrl + '/login'
-        }
-      )(req, res, next)
-    });
+    let appUrl = config.app.protocol + config.app.host + ':' + config.app.port;
+
+    return passport.authenticate('facebook', function (err, user, info) {
+      if (err) {
+        return next(err);
+      }
+      if (!user) {
+        return res.redirect(appUrl + '/login');
+      }
+      else {
+        let wordsToken = jwt.sign({userId: user.id}, config.auth.words.secret);
+        let urlWithToken = appUrl + '/authToken/' + wordsToken;
+        return res.redirect(urlWithToken);
+      }
+    })(req, res, next);
+  });
 }
 
