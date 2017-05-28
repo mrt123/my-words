@@ -6,8 +6,9 @@ var parseWord = require('./db-data-parser-1').parseWord;
 var responseObj = require('./responseObject');
 var dbQuery = require('./db-connection').query;
 var config = require('./config').get();
-require('./auth').configure(app);
+let auth = require('./auth');
 
+auth.configure(app);
 app.use(cors());
 app.use(bodyParser.json());
 
@@ -15,6 +16,8 @@ app.use('/', function (req, res, next) {
   console.log('--> [' + req.method + '] : ' + req.originalUrl);
   next();
 });
+
+app.use('/api', auth.authorise);
 
 app.get('/api/words/:id', function (req, res) {
 

@@ -1,21 +1,21 @@
-let expressSession = require('express-session');
 let config = require('./config').get();
 let passport = require('passport');
 let FacebookStrategy = require('passport-facebook').Strategy;
 let jwt = require('jsonwebtoken');
+let cookieParser = require('cookie-parser');
+let responseObj = require('./responseObject');
 
 exports.configure = configure;
+exports.authorise = authorise;
 
 function configure(app) {
+  app.use(cookieParser());
   defineAuthStrategy(app);
-  defineSessionHandlers();
   configureRoutes(app);
 }
 
 function defineAuthStrategy(app) {
-  app.use(expressSession({secret: config.auth.words.secret}));
   app.use(passport.initialize());
-  app.use(passport.session());
 
   passport.use(new FacebookStrategy({
       clientID: 128559457697935,
@@ -23,25 +23,9 @@ function defineAuthStrategy(app) {
       callbackURL: "/auth/facebook/callback"
     },
     function (accessToken, refreshToken, profile, done) {
-
-      console.log(profile);
       done(null, profile);
     }
   ));
-}
-
-function defineSessionHandlers() {
-
-  passport.serializeUser(function (user, done) {
-    done(null, {
-      userName: user.displayName,
-      userId: user.id
-    });
-  });
-
-  passport.deserializeUser(function (userDataIdentifiedBySession, done) {
-    done(null, userDataIdentifiedBySession);  // will pass to middleware attached to req.user
-  });
 }
 
 function configureRoutes(app) {
@@ -65,10 +49,26 @@ function configureRoutes(app) {
       }
       else {
         let wordsToken = jwt.sign({userId: user.id}, config.auth.words.secret);
-        let urlWithToken = appUrl + '/authToken/' + wordsToken;
-        return res.redirect(urlWithToken);
+        res.cookie('words-token', wordsToken, { httpOnly: true });
+        return res.redirect(appUrl);
       }
     })(req, res, next);
   });
+}
+
+function authorise(req, res, next) {
+  if (req.cookies['words-token']) {
+    let decodedToken;
+    try {
+      decodedToken = jwt.verify(req.cookies['words-token'], config.auth.words.secret)
+      req.user = {
+        userId: decodedToken.userId
+      };
+    }
+    catch (e) {
+      res.status(401).send(responseObj.wrapError('Error: You are not authorised to access this resource'));
+    }
+  }
+  next();
 }
 
