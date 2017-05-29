@@ -40,7 +40,16 @@ const GraduationCapIcon = () => (
   <GraduationCapSvg width='25' height='25' color='white'/>
 );
 
-export default () => {
+export default ({user}) => {
+
+  let userExists = user && user.name;
+  if(!userExists) {
+    return null;
+  }
+
+  let lastMenuItemText = userExists ? user.name : 'Login';
+  let lastMenuItemPath = userExists ? '/logout' : '/login';
+
   return (
     <NavBarWrapper>
       <Menu>
@@ -50,8 +59,7 @@ export default () => {
       </Menu>
 
       <Menu>
-        <NavAnchor to="/xxx">Link</NavAnchor>
-        <NavAnchor to="/login">Login</NavAnchor>
+        <NavAnchor to={lastMenuItemPath}>{lastMenuItemText}</NavAnchor>
       </Menu>
     </NavBarWrapper>
   );

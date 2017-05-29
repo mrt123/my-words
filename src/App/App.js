@@ -6,13 +6,13 @@ import {
   Switch
 } from 'react-router-dom'
 import styled from 'styled-components';
-import NavBar from './NavBar';
+import NavBarContainer from './NavBarContainer';
 
 import Search from './../rotues/search/Search';
 import CardsContainer from './../rotues/cards/CardsContainer';
 import MyWordsContainer from './../rotues/MyWordsContainer';
 import WordContainer from '../common/WordContainer';
-import WordsToken from '../rotues/WordsToken';
+import Logout from '../rotues/LogOut';
 import Login from '../rotues/Login';
 
 const AppContainer = styled.div`
@@ -37,7 +37,7 @@ const NoMatch = ({ location }) => (
 );
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
-  const logged = localStorage.getItem('wordsToken') !== null;
+  const logged = document.cookie.indexOf('words-token=') >= 0;
 
   var renderFunction = (props) => {
     if (logged) {
@@ -52,16 +52,15 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
 };
 
 export default () => {
-    // TODO:  implement navbar container and get user from /api/users/me
   return (
     <Router>
       <AppContainer>
-        <NavBar/>
+        <NavBarContainer/>
         <Scroller>
           <Switch>
             <Redirect exact from="/" to="/search"/>
-            <Route path="/authToken/:token" render={({match}) => <WordsToken token={match.params.token}/>}/>/>
             <Route exact path="/login" component={Login}/>
+            <PrivateRoute exact path="/logout" component={Logout}/>
             <PrivateRoute exact path="/search" component={Search}/>
             <PrivateRoute path="/search/:wordId" render={({match}) => <Search wordId={match.params.wordId}/>}/>
             <PrivateRoute path="/myWords" component={MyWordsContainer}/>

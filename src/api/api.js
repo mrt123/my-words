@@ -1,6 +1,12 @@
 import 'whatwg-fetch';
 const API_HOST = getApiHost();
 
+export function fetchUser() {
+  return getResponseFromFetch(fetch(API_HOST + '/api/users/me', {
+    credentials: 'include'
+  }));
+}
+
 export function fetchDefinition(word) {
   return getResponseFromFetch(fetch(API_HOST + '/api/words/' + word));
 }
