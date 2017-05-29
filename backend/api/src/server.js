@@ -9,7 +9,10 @@ var config = require('./config').get();
 let auth = require('./auth');
 
 auth.configure(app);
-app.use(cors());
+app.use(cors({
+  origin: config.api.cors.origin,
+  credentials: true
+}));
 app.use(bodyParser.json());
 
 app.use('/', function (req, res, next) {
