@@ -31,6 +31,13 @@ function defineAuthStrategy(app) {
 function configureRoutes(app) {
   app.get('/auth/facebook', passport.authenticate('facebook'));
 
+  app.get('/logout', function(req, res) {
+    let appUrl = config.app.protocol + config.app.host + ':' + config.app.port;
+    res.cookie('words-token', 'undefined', { expires: new Date() });
+    req.logout();
+    res.redirect(appUrl + '/login');
+  });
+
   /**
    * TODO:
    * - implement token expiration
@@ -48,8 +55,15 @@ function configureRoutes(app) {
         return res.redirect(appUrl + '/login');
       }
       else {
-        let wordsToken = jwt.sign({userId: user.id}, config.auth.words.secret);
-        res.cookie('words-token', wordsToken, { httpOnly: true });
+        let wordsToken = jwt.sign({
+          user: {
+            publicInfo: {
+              id: user.id,
+              name: user.displayName
+            }
+          }
+        }, config.auth.words.secret);
+        res.cookie('words-token', wordsToken, { httpOnly: false });
         return res.redirect(appUrl);
       }
     })(req, res, next);
@@ -61,12 +75,10 @@ function authorise(req, res, next) {
     let decodedToken;
     try {
       decodedToken = jwt.verify(req.cookies['words-token'], config.auth.words.secret)
-      req.user = {
-        userId: decodedToken.userId
-      };
+      req.user = decodedToken.user.publicInfo;
     }
     catch (e) {
-      res.status(401).send(responseObj.wrapError('Error: You are not authorised to access this resource'));
+      req.user = undefined;
     }
   }
   next();
