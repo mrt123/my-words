@@ -8,9 +8,9 @@ import {
 import styled from 'styled-components';
 import NavBarContainer from './NavBarContainer';
 
-import Search from './../rotues/search/Search';
-import CardsContainer from './../rotues/cards/CardsContainer';
-import MyWordsContainer from './../rotues/MyWordsContainer';
+import Search from '../rotues/search/Search';
+import CardsContainer from '../rotues/cards/CardsContainer';
+import MyWordsContainer from '../rotues/MyWordsContainer';
 import WordContainer from '../common/WordContainer';
 import Logout from '../rotues/LogOut';
 import Login from '../rotues/Login';
@@ -41,7 +41,12 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
 
   var renderFunction = (props) => {
     if (logged) {
-      return <Component {...props}/>
+      if(rest.render) {
+        return <Route render={rest.render}/>
+      }
+      else {
+        return <Component {...props}/>
+      }
     }
     else {
       return <Redirect to={{ pathname: '/login', state: { from: props.location } }}/>
