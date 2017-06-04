@@ -1,15 +1,20 @@
-var mysql = require('promise-mysql');
-var config = require('./config').get();
+let mysql = require('promise-mysql');
+let config = require('./config').get();
+let colors = require('colors/safe');
 
 exports.query = query;
 
 let pool = createConnectionPool();
 
 function query(queryString) {
-  return pool.query(queryString).then(function (rows) {
-    console.log('----> ', queryString);
-    return rows;
-  });
+  console.log('      ', queryString);
+  return pool.query(queryString)
+    .catch(function (e) {
+      let queryHint = queryString.split(' ').slice(0, 4).join(' ');
+      let errorMessage = 'query[' + queryHint + '...] failed : ' + e.message;
+      console.log(colors.red('       ' + errorMessage));
+      throw new Error(errorMessage);
+    });
 }
 
 function createConnectionPool() {

@@ -1,11 +1,11 @@
-var express = require('express');
-var bodyParser = require("body-parser");
-var app = express();
-var cors = require('cors')
-var parseWord = require('./db-data-parser-1').parseWord;
-var responseObj = require('./responseObject');
-var dbQuery = require('./db-connection').query;
-var config = require('./config').get();
+let express = require('express');
+let bodyParser = require("body-parser");
+let app = express();
+let cors = require('cors')
+let parseWord = require('./db-data-parser-1').parseWord;
+let responseObj = require('./responseObject');
+let dbQuery = require('./db-connection').query;
+let config = require('./config').get();
 let auth = require('./auth');
 
 auth.configure(app);
@@ -29,8 +29,8 @@ app.get('/api/words/:id', function (req, res) {
       var parsedWord = parseWord(rows);
       res.send(responseObj.wrapParsedWordData(rows, parsedWord));
     })
-    .catch((error)=> {
-      res.status(500).send(responseObj.wrapError('Error: ' + error.code));
+    .catch((e)=> {
+      res.status(500).send();
     });
 });
 
@@ -60,7 +60,7 @@ app.post('/api/favorite/words', function (req, res) {
       });
     }
     else {
-      res.status(500).send('DB QUERY ERROR');
+      res.status(500).send();
     }
   });
 });
@@ -74,6 +74,8 @@ app.get('/api/favorite/words/:id', function (req, res) {
       wordId: req.params.id,
       isFavorite: rows.length > 0
     });
+  }).catch((e)=> {
+    res.status(500).send();
   });
 });
 
