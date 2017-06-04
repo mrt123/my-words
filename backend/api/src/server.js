@@ -67,7 +67,7 @@ app.post('/api/favorite/words', function (req, res) {
 
 app.get('/api/favorite/words/:id', function (req, res) {
 
-  var isFavoriteQueryString = 'SELECT * FROM favoriteWords where wordId="' + req.params.id + '"';
+  var isFavoriteQueryString = 'select * from favoriteWords where wordId="' + req.params.id + '"';
 
   dbQuery(isFavoriteQueryString).then(function (rows) {
     res.send({
