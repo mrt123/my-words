@@ -2,21 +2,19 @@ import 'whatwg-fetch';
 const API_HOST = getApiHost();
 
 export function fetchUser() {
-  return getResponseFromFetch(fetch(API_HOST + '/api/users/me', {
-    credentials: 'include'
-  }));
+  return getResponseFromFetch(fetchWithCredentials(API_HOST + '/api/users/me'));
 }
 
 export function fetchDefinition(word) {
-  return getResponseFromFetch(fetch(API_HOST + '/api/words/' + word));
+  return getResponseFromFetch(fetchWithCredentials(API_HOST + '/api/words/' + word));
 }
 
 export function fetchFavoriteByWordId(wordId) {
-  return getResponseFromFetch(fetch(API_HOST + '/api/favorite/words/' + wordId));
+  return getResponseFromFetch(fetchWithCredentials(API_HOST + '/api/favorite/words/' + wordId));
 }
 
 export function toggleFavoriteByWordId(newFavValue, wordId) {
-  return fetch(API_HOST + "/api/favorite/words/",
+  return fetchWithCredentials(API_HOST + "/api/favorite/words/",
     {
       method: "POST",
       headers: {
@@ -32,7 +30,14 @@ export function toggleFavoriteByWordId(newFavValue, wordId) {
 }
 
 export function fetchMyWordsIds() {
-  return getResponseFromFetch(fetch(API_HOST + '/api/favorite/words/'));
+  return getResponseFromFetch(fetchWithCredentials(API_HOST + '/api/favorite/words/'));
+}
+
+function fetchWithCredentials(resourceUrl, opts = {}) {
+  var optsWithCredentials = Object.assign(opts, {
+    credentials: 'include'
+  });
+  return fetch(resourceUrl, optsWithCredentials);
 }
 
 function getResponseFromFetch(fetchResult) {

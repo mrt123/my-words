@@ -22,7 +22,7 @@ exports.get = function () {
     },
     auth: {
       words: {
-        secret: 'shhh'
+        secret: 'FORGOT TO PROVIDE --facebook-secret ???'
       },
       facebook: {
         secret: argv['facebook-secret']

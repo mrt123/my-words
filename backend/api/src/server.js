@@ -35,20 +35,23 @@ app.get('/api/words/:id', function (req, res) {
 });
 
 app.get('/api/favorite/words', function (req, res) {
+  let userId = req.user.id;
 
-  dbQuery('select * from favoriteWords where userId="' + '19831119' + '"').then(function (rows) {
+  dbQuery('select * from favoriteWords where userId="' + userId + '"').then(function (rows) {
     res.send(rows.map((r)=> r.wordId));
   });
 });
 
 app.post('/api/favorite/words', function (req, res) {
+  let userId = req.user.id;
+
   var queryString;
 
   if (req.body.isFavorite) {
-    queryString = 'insert INTO favoriteWords values (19831119,"' + req.body.wordId + '")';
+    queryString = 'insert INTO favoriteWords values (' + userId + ',"' + req.body.wordId + '")';
   }
   else if (!req.body.isFavorite) {
-    queryString = 'delete from favoriteWords where userId=19831119 and wordId="' + req.body.wordId + '"';
+    queryString = 'delete from favoriteWords where userId=' + userId + ' and wordId="' + req.body.wordId + '"';
   }
 
   dbQuery(queryString).then(function (dbResp) {
@@ -66,8 +69,8 @@ app.post('/api/favorite/words', function (req, res) {
 });
 
 app.get('/api/favorite/words/:id', function (req, res) {
-
-  var isFavoriteQueryString = 'select * from favoriteWords where wordId="' + req.params.id + '"';
+  let userId = req.user.id;
+  let isFavoriteQueryString = 'select * from favoriteWords where userId=' + userId + ' and wordId="' + req.params.id + '"';
 
   dbQuery(isFavoriteQueryString).then(function (rows) {
     res.send({
