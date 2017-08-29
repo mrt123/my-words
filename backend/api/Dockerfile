@@ -8,7 +8,9 @@ FROM node:slim
  ENV NODE_ENV $NODE_ENV
  COPY package.json /usr/src/app/
  RUN yarn install && yarn cache clean
+ RUN yarn install knex
  COPY . /usr/src/app
 
  CMD [ "node", "src/server.js", "--db-host", "words-db-box" ]
+ CMD [ "knex", "migrate:latest"]
 
