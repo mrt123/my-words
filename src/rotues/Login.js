@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {RouteWrapper} from './routeComponents';
+import {RouteWrapper} from './../common/routeComponents';
 import styled from 'styled-components';
 import FacebookButton from '../common/buttons/FacebookButton.js'
 import { getApiHost } from './../api/api';

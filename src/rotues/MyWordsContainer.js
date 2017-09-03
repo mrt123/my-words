@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import * as api from './../api/api';
-import MyWords from './MyWords';
+import MyWords from './../common/MyWords';
 
 class MyWordsContainer extends Component {
   constructor() {

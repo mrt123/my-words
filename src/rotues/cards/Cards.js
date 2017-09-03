@@ -1,5 +1,5 @@
 import React from 'react'
-import {RouteWrapper, BigSpinner} from '../routeComponents';
+import {RouteWrapper, BigSpinner} from '../../common/routeComponents';
 import Card from './Card'
 
 export default class Cards extends React.Component {

@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
-import {BigSpinner} from './routeComponents';
+import {BigSpinner} from '../common/routeComponents';
 
 const Wrapper = styled.div`
   display: flex;

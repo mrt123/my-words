@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import {BigSpinner} from '../rotues/routeComponents';
+import {BigSpinner} from '../common/routeComponents';
 import LexicalEntries from './LexicalEntries';
 import FavoriteContainer from './FavoriteContainer.js';
 

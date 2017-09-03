@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {RouteWrapper} from '../routeComponents';
+import {RouteWrapper} from '../../common/routeComponents';
 import SearchBar from './SearchBar';
 import WordContainer from './../../common/WordContainer';
 
