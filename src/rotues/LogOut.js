@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {RouteWrapper} from './routeComponents';
 import styled from 'styled-components';
+import { getApiHost } from './../api/api';
 
 const LoginRouteWrapper = styled(RouteWrapper)`
   align-items: center;
@@ -32,7 +33,8 @@ const ButtonContentWrapper = styled.div`   // Safari does not allow display: fle
 export default class Logout extends Component {
 
   goToFacebookAuth() {
-    location.href = 'http://localhost:1337/logout';  // TODO: assemble url during build/run time!
+    document.cookie = "logged=false";
+    location.href = `${getApiHost()}/logout`;
   }
 
   render() {

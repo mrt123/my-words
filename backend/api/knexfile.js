@@ -21,6 +21,7 @@ module.exports = {
   production: {
     client: 'mysql',
     connection: {
+      host: 'words-db-box',
       database: 'dict',
       user:     'root',
       password: '123'

@@ -8,6 +8,8 @@ let responseObj = require('./responseObject');
 exports.configure = configure;
 exports.authorise = authorise;
 
+const API_TOKEN_NAME = 'words-api-token';
+
 function configure(app) {
   app.use(cookieParser());
   defineAuthStrategy(app);
@@ -18,7 +20,7 @@ function defineAuthStrategy(app) {
   app.use(passport.initialize());
 
   passport.use(new FacebookStrategy({
-      clientID: 128559457697935,
+      clientID: config.auth.facebook.appId,
       clientSecret: config.auth.facebook.secret,
       callbackURL: "/auth/facebook/callback"
     },
@@ -33,7 +35,7 @@ function configureRoutes(app) {
 
   app.get('/logout', function(req, res) {
     let appUrl = config.app.protocol + config.app.host + ':' + config.app.port;
-    res.cookie('words-token', 'undefined', { expires: new Date() });
+    res.cookie(API_TOKEN_NAME, 'undefined', { expires: new Date() });
     req.logout();
     res.redirect(appUrl + '/login');
   });
@@ -49,12 +51,16 @@ function configureRoutes(app) {
 
     return passport.authenticate('facebook', function (err, user, info) {
       if (err) {
+        console.log('passport facebook auth failed!');
+        throw(err);
         return next(err);
       }
       if (!user) {
+        console.log('no user received from facebook!');
         return res.redirect(appUrl + '/login');
       }
       else {
+        console.log(`passport facebook auth success. user.displayName: ${user.displayName}`);
         let wordsToken = jwt.sign({
           user: {
             publicInfo: {
@@ -63,18 +69,19 @@ function configureRoutes(app) {
             }
           }
         }, config.auth.words.secret);
-        res.cookie('words-token', wordsToken, { httpOnly: false });
-        return res.redirect(appUrl);
+        res.cookie(API_TOKEN_NAME, wordsToken, { httpOnly: false });
+        return res.redirect(appUrl + '/setLogged');
       }
     })(req, res, next);
   });
 }
 
 function authorise(req, res, next) {
-  if (req.cookies['words-token']) {
+  const apiAuthCookie = req.cookies[API_TOKEN_NAME];
+  if (apiAuthCookie) {
     let decodedToken;
     try {
-      decodedToken = jwt.verify(req.cookies['words-token'], config.auth.words.secret)
+      decodedToken = jwt.verify(apiAuthCookie, config.auth.words.secret);
       req.user = decodedToken.user.publicInfo;
     }
     catch (e) {

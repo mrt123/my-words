@@ -2,7 +2,7 @@ var argv = require('minimist')(process.argv.slice(2));
 
 exports.get = function () {
 
-  let developmentConfig = {
+  const developmentConfig = {
     app: {
       protocol: 'http://',
       host: 'localhost',
@@ -15,26 +15,28 @@ exports.get = function () {
       }
     },
     db: {
-      host: 'localhost',
+      host: argv['db-host'] || 'localhost',   // usually provided via docker-file
       user: 'root',
       password: '123',
       name: 'dict'
     },
     auth: {
       words: {
-        secret: 'FORGOT TO PROVIDE --facebook-secret ???'
+        secret: 'usedTOGenerateAuthToken'
       },
       facebook: {
-        secret: argv['facebook-secret']
+        appId: '128559457697935',
+        secret: argv['facebook-secret'] || 'FORGOT TO PROVIDE FB SECRET ?'
       }
     }
   };
 
-  let productionConfig = {
+  const productionConfig = {
+    containerVersion: 'xx',
     app: {
-      protocol: argv['app-protocol'],
-      host: argv['app-host'],
-      port: argv['app-port']
+      protocol: 'http://',
+      host: 'words.dremora.com',
+      port: 80
     },
     api: {
       port: 1337,
@@ -43,20 +45,20 @@ exports.get = function () {
       }
     },
     db: {
-      host: argv['db-host'],
+      host: 'words-db-box',
       user: 'root',
       password: '123',
       name: 'dict'
     },
     auth: {
       words: {
-        secret: argv['words-secret']
+        secret: process.env.WORDS_SECRET || 'FORGOT TO PROVIDE FB SECRET ?'
       },
       facebook: {
-        secret: argv['facebook-secret']
+        appId: '1427136364049190',
+        secret: process.env.FB_SECRET || 'FORGOT TO PROVIDE FB SECRET ?'
       }
     }
   };
-
-  return argv['dev'] ? developmentConfig : productionConfig;
+  return process.env.NODE_ENV === 'production' ? productionConfig : developmentConfig;
 };

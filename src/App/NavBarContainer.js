@@ -10,7 +10,8 @@ export default class NavBarContainer extends Component {
   }
 
   componentDidMount() {
-    const logged = document.cookie.indexOf('words-token=') >= 0;
+    const logged = document.cookie.indexOf('logged=true') >= 0;
+
     if(logged) {
       this.fetchUser(this.props.userId);
     }

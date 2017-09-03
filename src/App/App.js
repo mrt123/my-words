@@ -14,6 +14,7 @@ import MyWordsContainer from '../rotues/MyWordsContainer';
 import WordContainer from '../common/WordContainer';
 import Logout from '../rotues/LogOut';
 import Login from '../rotues/Login';
+import SetLogged from '../rotues/SetLogged';
 
 const AppContainer = styled.div`
   display: flex;
@@ -37,7 +38,7 @@ const NoMatch = ({ location }) => (
 );
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
-  const logged = document.cookie.indexOf('words-token=') >= 0;
+  const logged = document.cookie.indexOf('logged=true') >= 0;
 
   var renderFunction = (props) => {
     if (logged) {
@@ -65,6 +66,7 @@ export default () => {
           <Switch>
             <Redirect exact from="/" to="/search"/>
             <Route exact path="/login" component={Login}/>
+            <Route exact path="/setLogged" component={SetLogged}/>
             <PrivateRoute exact path="/logout" component={Logout}/>
             <PrivateRoute exact path="/search" component={Search}/>
             <PrivateRoute path="/search/:wordId" render={({match}) => <Search wordId={match.params.wordId}/>}/>

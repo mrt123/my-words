@@ -42,10 +42,19 @@ function fetchWithCredentials(resourceUrl, opts = {}) {
 
 function getResponseFromFetch(fetchResult) {
   return fetchResult
+    .then(takeAuthAction)
     .then(parseServerResponse)
     .catch((parsingError) => {
       return getErrorForMessage(parsingError.message);
     });
+}
+
+function takeAuthAction(response) {
+  if(response.status === 401) {
+    document.cookie = "logged=false";
+    location.href = '/login';
+  }
+  return response;
 }
 
 function parseServerResponse(response) {
@@ -65,9 +74,9 @@ function getErrorForMessage(message) {
   }
 }
 
-function getApiHost() {
+export function getApiHost() {
   if(process.env.NODE_ENV === 'production') {
-    return process.env.REACT_APP_API_HOST;
+    return process.env.REACT_APP_API_HOST; //TODO: env var needs to be present during build, can we better this?
   }
   else {
     return 'http://localhost:1337';

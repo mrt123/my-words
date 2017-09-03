@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import {RouteWrapper} from './routeComponents';
 import styled from 'styled-components';
-import FacebookSvg from './../img/FacebookOfficial'
+import FacebookSvg from './../img/FacebookOfficial';
+import { getApiHost } from './../api/api';
 
 const LoginRouteWrapper = styled(RouteWrapper)`
   align-items: center;
@@ -38,7 +39,7 @@ const FacebookIcon = () => (
 export default class Login extends Component {
 
   goToFacebookAuth() {
-    location.href = 'http://localhost:1337/auth/facebook';  // TODO: assemble url during build/run time!
+    location.href = `${getApiHost()}/auth/facebook`;
   }
 
   render() {
