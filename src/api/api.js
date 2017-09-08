@@ -76,7 +76,7 @@ function getErrorForMessage(message) {
 
 export function getApiHost() {
   if(process.env.NODE_ENV === 'production') {
-    return process.env.REACT_APP_API_HOST; //TODO: env var needs to be present during build, can we better this?
+    return process.env.REACT_APP_WORDS_API_HOST;
   }
   else {
     return 'http://localhost:1337';

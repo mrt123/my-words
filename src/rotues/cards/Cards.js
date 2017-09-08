@@ -1,20 +1,31 @@
 import React from 'react'
 import {RouteWrapper, BigSpinner} from '../../common/routeComponents';
 import Card from './Card'
+import Button1 from '../../common/buttons/Button1.js'
+import styled from 'styled-components'
+
+const Footer = styled.div`
+  display: flex;
+  height: 70px;
+  align-items: center;
+  justify-content: center;
+`;
 
 export default class Cards extends React.Component {
   render() {
 
     if (this.props.loading) {
       return (
-          <BigSpinner/>
+        <BigSpinner/>
       );
     }
     else if (this.props.activeWordId) {
       return (
         <RouteWrapper>
           <Card activeWordId={this.props.activeWordId}/>
-          <button onClick={this.props.nextCardAction}>Next</button>
+          <Footer>
+            <Button1 onClick={this.props.nextCardAction} text="Next"/>
+          </Footer>
         </RouteWrapper>
       );
     }
@@ -22,7 +33,7 @@ export default class Cards extends React.Component {
       return (
         <div>
           Quiz Finished
-          <button>reset</button>
+          <Button1 text="XXX"/>
         </div>
       )
     }

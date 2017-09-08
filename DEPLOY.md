@@ -1,1 +1,0 @@
-```export REACT_APP_API_HOST=http://ec2-54-89-222-246.compute-1.amazonaws.com```
