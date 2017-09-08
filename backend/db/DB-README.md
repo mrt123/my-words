@@ -31,5 +31,10 @@ Useful Queries:
 
 
 #Road-map: 
-* empty for now
+* Consider whether KNEX migration belongs in DB or API or separate
+** when I deploy db I want db to be up to date
+** when I deploy API ... I probably just want to deploy API (but I might also be deploying new features which require db schema update)
+** API will be deployed way more often then schema (but DB container itself might never be re-deployed)
+** running knex when there's no migration shouldn't take more then a split second
+** I don't deploy API via docker on local (can I deploy an already migrated DB container?)
 
