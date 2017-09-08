@@ -15,9 +15,10 @@
     "mysql": "^2.14.1",
     "passport": "^0.3.2",
     "passport-facebook": "^2.1.1",
+    "pretty-print": "^1.1.0",
     "promise-mysql": "^3.0.0"
   },
   "scripts": {
-    "start": "node src/server.js"
+    "start": "knex migrate:latest && node src/server.js"
   }
 }

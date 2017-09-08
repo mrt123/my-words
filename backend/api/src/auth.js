@@ -1,4 +1,4 @@
-let config = require('./config').get();
+const { config } = require('./config');
 let passport = require('passport');
 let FacebookStrategy = require('passport-facebook').Strategy;
 let jwt = require('jsonwebtoken');
@@ -34,10 +34,9 @@ function configureRoutes(app) {
   app.get('/auth/facebook', passport.authenticate('facebook'));
 
   app.get('/logout', function(req, res) {
-    let appUrl = config.app.protocol + config.app.host + ':' + config.app.port;
     res.cookie(API_TOKEN_NAME, 'undefined', { expires: new Date() });
     req.logout();
-    res.redirect(appUrl + '/login');
+    res.redirect(config.ui.host + '/login');
   });
 
   /**
@@ -47,8 +46,6 @@ function configureRoutes(app) {
 
   app.get('/auth/facebook/callback', function (req, res, next) {
 
-    let appUrl = config.app.protocol + config.app.host + ':' + config.app.port;
-
     return passport.authenticate('facebook', function (err, user, info) {
       if (err) {
         console.log('passport facebook auth failed!');
@@ -57,7 +54,7 @@ function configureRoutes(app) {
       }
       if (!user) {
         console.log('no user received from facebook!');
-        return res.redirect(appUrl + '/login');
+        return res.redirect(config.ui.host + '/login');
       }
       else {
         console.log(`passport facebook auth success. user.displayName: ${user.displayName}`);
@@ -70,7 +67,7 @@ function configureRoutes(app) {
           }
         }, config.auth.words.secret);
         res.cookie(API_TOKEN_NAME, wordsToken, { httpOnly: false });
-        return res.redirect(appUrl + '/setLogged');
+        return res.redirect(config.ui.host + '/setLogged');
       }
     })(req, res, next);
   });

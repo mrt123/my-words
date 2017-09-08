@@ -1,11 +1,11 @@
 let express = require('express');
 let bodyParser = require("body-parser");
 let app = express();
-let cors = require('cors')
+let cors = require('cors');
 let parseWord = require('./db-data-parser-1').parseWord;
 let responseObj = require('./responseObject');
 let dbQuery = require('./db-connection').query;
-let config = require('./config').get();
+const { config, sanitize, report } = require('./config');
 let auth = require('./auth');
 
 auth.configure(app);
@@ -96,5 +96,5 @@ app.get('/api/users/me',
 
 var httpServer = require('http').createServer(app);
 httpServer.listen(config.api.port, function () {
-  console.log('api server running: ' + JSON.stringify(config, null, 2));
+  report('api server running', config);
 });

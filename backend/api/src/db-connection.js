@@ -1,6 +1,6 @@
-let mysql = require('promise-mysql');
-let config = require('./config').get();
-let colors = require('colors/safe');
+const mysql = require('promise-mysql');
+const { config } = require('./config');
+const colors = require('colors/safe');
 
 exports.query = query;
 

@@ -3,12 +3,19 @@ API & AUTH server.
 * provides REST API service on port 1337
 * run it via docker Docker or directly in node
 
-# Install
-* `yarn install`
+# Pre-requisites
+* `npm install -g yarn`
 * `yarn global add knex`    - if you wish to work with db migrations
 
+# Install
+* `yarn install`
+* have these env variables preset:
+** WORDS_FB_SECRET   (your facebook app's secret)
+** WORDS_SECRET  - used to generate auth token (required for production only)
+* You must ensure DB is running (required db spec will be printed upon npn start)
+
 # Run Locally via Node
-* `node src/server.js --facebook-secret your-fb-secret --dev`
+* `npm start`
 
 ## Run Locally via Docker
 Build Image
