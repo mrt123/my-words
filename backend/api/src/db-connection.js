@@ -19,10 +19,10 @@ function query(queryString) {
 
 function createConnectionPool() {
   return mysql.createPool({
-    host: config.db.host,
-    user: config.db.user,
-    password: config.db.password,
-    database: config.db.name,
+    host: config['db-host'],
+    user: config['db-user'],
+    password: config['db-password'],
+    database: config['db-name'],
     connectionLimit: 10
   });
 }

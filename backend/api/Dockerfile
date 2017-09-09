@@ -10,5 +10,4 @@ FROM node:slim
  RUN yarn install && yarn cache clean
  RUN yarn global add knex
 
-# CMD [ "node", "src/server.js", "--db-host", "words-db-box", "&&", "knex", "migrate:latest" ]
 CMD [ "node", "src/server.js" ]

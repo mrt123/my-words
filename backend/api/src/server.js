@@ -10,7 +10,7 @@ let auth = require('./auth');
 
 auth.configure(app);
 app.use(cors({
-  origin: config.api.cors.origin,
+  origin: config['api-cors-origin'],
   credentials: true
 }));
 app.use(bodyParser.json());
@@ -95,6 +95,6 @@ app.get('/api/users/me',
 );
 
 var httpServer = require('http').createServer(app);
-httpServer.listen(config.api.port, function () {
+httpServer.listen(config['api-port'], function () {
   report('api server running', config);
 });

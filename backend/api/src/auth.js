@@ -20,8 +20,8 @@ function defineAuthStrategy(app) {
   app.use(passport.initialize());
 
   passport.use(new FacebookStrategy({
-      clientID: config.auth.facebook.appId,
-      clientSecret: config.auth.facebook.secret,
+      clientID: config['auth-facebook-appId'],
+      clientSecret: config['auth-facebook-secret'],
       callbackURL: "/auth/facebook/callback"
     },
     function (accessToken, refreshToken, profile, done) {
@@ -36,7 +36,7 @@ function configureRoutes(app) {
   app.get('/logout', function(req, res) {
     res.cookie(API_TOKEN_NAME, 'undefined', { expires: new Date() });
     req.logout();
-    res.redirect(config.ui.host + '/login');
+    res.redirect(config['ui-host'] + '/login');
   });
 
   /**
@@ -54,7 +54,7 @@ function configureRoutes(app) {
       }
       if (!user) {
         console.log('no user received from facebook!');
-        return res.redirect(config.ui.host + '/login');
+        return res.redirect(config['ui-host'] + '/login');
       }
       else {
         console.log(`passport facebook auth success. user.displayName: ${user.displayName}`);
@@ -65,9 +65,9 @@ function configureRoutes(app) {
               name: user.displayName
             }
           }
-        }, config.auth.words.secret);
+        }, config['auth-words-secret']);
         res.cookie(API_TOKEN_NAME, wordsToken, { httpOnly: false });
-        return res.redirect(config.ui.host + '/setLogged');
+        return res.redirect(config['ui-host'] + '/setLogged');
       }
     })(req, res, next);
   });
@@ -78,7 +78,7 @@ function authorise(req, res, next) {
   if (apiAuthCookie) {
     let decodedToken;
     try {
-      decodedToken = jwt.verify(apiAuthCookie, config.auth.words.secret);
+      decodedToken = jwt.verify(apiAuthCookie, config['auth-words-secret']);
       req.user = decodedToken.user.publicInfo;
     }
     catch (e) {
