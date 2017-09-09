@@ -8,13 +8,13 @@ import {
 import styled from 'styled-components';
 import NavBarContainer from './NavBarContainer';
 
-import Search from '../rotues/search/Search';
-import CardsContainer from '../rotues/cards/CardsContainer';
-import MyWordsContainer from '../rotues/MyWordsContainer';
+import Search from '../routes/search/Search';
+import CardsContainer from '../routes/cards/CardsContainer';
+import MyWordsContainer from '../routes/MyWordsContainer';
 import WordContainer from '../common/WordContainer';
-import Logout from '../rotues/LogOut';
-import Login from '../rotues/Login';
-import SetLogged from '../rotues/SetLogged';
+import Logout from '../routes/LogOut';
+import Login from '../routes/Login';
+import SetLogged from '../routes/SetLogged';
 
 const AppContainer = styled.div`
   display: flex;
