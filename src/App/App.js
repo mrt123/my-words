@@ -18,7 +18,7 @@ import SetLogged from '../rotues/SetLogged';
 
 const AppContainer = styled.div`
   display: flex;
-  height: 100vh;
+  height: ${window.innerHeight}px;  // device height - address bar
   flex-direction: column;
   justify-content: center;
 `;

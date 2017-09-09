@@ -12,7 +12,7 @@ const Flipper = styled.div`
   display: flex;
   flex-grow: 1;
   position: relative;
-  margin: 40px 40px 40px 40px;
+  margin: 20px 40px 20px 40px;
   transform-style: preserve-3d;
   transition: transform ${props => props.speed};
   transform: ${props => props.flipped ? 'rotateY( 180deg )' : 'rotateY( 0deg )'};
