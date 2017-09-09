@@ -62,6 +62,7 @@ Make sure you:
 * `aws ecr get-login`
 * execute login command
 * `ssh -i ~/Desktop/tomasz-key-pair.pem ec2-user@ec2-54-89-222-246.compute-1.amazonaws.com`
+* `docker ps --no-trunc` or ```docker ps --format "table {{.Names}}\t{{.Status}}"`
 
 # Road-map: 
 * Move to node:slim container (bash is still required for troubleshooting)
