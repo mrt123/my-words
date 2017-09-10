@@ -7,10 +7,11 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   flex-shrink: 0;
-  margin-top: 30px;
+  margin: 20px;
 `;
 
 const Input = styled.input`
+  flex-grow: 3;
   font-size: 20px;
   padding: 10px;
   color: palevioletred;
@@ -25,6 +26,7 @@ const Input = styled.input`
 `;
 
 const Button = styled.button`
+  flex-grow: 1;
   background-color: #B4D1B6;
   color: white;
   border: none;
@@ -64,8 +66,11 @@ class Search extends Component {
   }
 
   handleKeyPress(e) {
+    console.log(Object.keys(e));
+    console.log(e.target);
     if (e.key === 'Enter') {
       this.performSearch(e);
+      e.target.blur();
     }
   }
 
@@ -75,6 +80,7 @@ class Search extends Component {
         <Input type="text" value={this.state.value}
                onChange={this.handleInputChange}
                onKeyPress={this.handleKeyPress}
+               size="2"
                placeholder={PLACEHOLDER_TEXT}/>
         <Button onClick={this.performSearch}>Search</Button>
       </Wrapper>
