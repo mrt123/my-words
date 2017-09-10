@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import {RouteWrapper} from '../../common/routeComponents';
-import SearchBar from './SearchBar';
-import WordContainer from './../../common/WordContainer';
+import {RouteWrapper} from '../common/routeComponents';
+import SearchBar from './../common/SearchBar';
+import WordContainer from './../common/word/WordContainer';
 
 export default class Home extends Component {
 

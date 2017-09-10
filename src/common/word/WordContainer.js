@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import * as api from './../api/api';
+import * as api from './../../api/api';
 import Word from './Word';
 
 class WordContainer extends Component {

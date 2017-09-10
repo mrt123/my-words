@@ -1,6 +1,6 @@
 import React from 'react'
-import * as api from './../../api/api'
-import Cards from './Cards'
+import * as api from './../api/api'
+import Cards from './../common/Cards'
 
 export default class extends React.Component {  // TODO: remove duplication with myWordsContainer.
   constructor() {

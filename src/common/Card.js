@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import WordContainer from './../../common/WordContainer.js'
+import WordContainer from './word/WordContainer.js'
 
 const Perspective = styled.div`
   display: flex;

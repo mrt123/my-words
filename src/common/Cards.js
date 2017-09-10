@@ -1,7 +1,7 @@
 import React from 'react'
-import {RouteWrapper, BigSpinner} from '../../common/routeComponents';
+import {RouteWrapper, BigSpinner} from './routeComponents';
 import Card from './Card'
-import Button1 from '../../common/buttons/Button1.js'
+import Button1 from './buttons/Button1.js'
 import styled from 'styled-components'
 
 const Footer = styled.div`

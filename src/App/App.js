@@ -8,10 +8,10 @@ import {
 import styled from 'styled-components';
 import NavBarContainer from './NavBarContainer';
 
-import Search from '../routes/search/Search';
-import CardsContainer from '../routes/cards/CardsContainer';
+import Search from '../routes/Search';
+import CardsContainer from '../routes/CardsContainer';
 import MyWordsContainer from '../routes/MyWordsContainer';
-import WordContainer from '../common/WordContainer';
+import WordContainer from '../common/word/WordContainer';
 import Logout from '../routes/LogOut';
 import Login from '../routes/Login';
 import SetLogged from '../routes/SetLogged';

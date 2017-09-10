@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import {BigSpinner} from '../common/routeComponents';
+import {BigSpinner} from '../routeComponents';
 import LexicalEntries from './LexicalEntries';
-import FavoriteContainer from './FavoriteContainer.js';
+import FavoriteContainer from './../FavoriteContainer.js';
 
 const WordWrapper = styled.div`
   margin: 30px 10px;

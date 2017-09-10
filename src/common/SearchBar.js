@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import createHistory from 'history/createBrowserHistory'
+import createHistory from '../../node_modules/history/createBrowserHistory'
 const history = createHistory();
 
 const Wrapper = styled.div`
